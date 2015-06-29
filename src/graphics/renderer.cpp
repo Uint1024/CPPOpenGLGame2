@@ -171,8 +171,8 @@ namespace Renderer{
 
 
     //create shaders and a shader program with them
-    Shader shadertest = Shader(GL_VERTEX_SHADER, "vertex_shader.gl");
-    Shader shadertest2 = Shader(GL_FRAGMENT_SHADER, "fragment_shader.gl");
+    Shader shadertest = Shader(GL_VERTEX_SHADER, "shader/vertex_shader.gl");
+    Shader shadertest2 = Shader(GL_FRAGMENT_SHADER, "shader/fragment_shader.gl");
     glProgram1 = new ShaderProgram(shadertest, shadertest2);
     glProgram1->use();
 
@@ -192,6 +192,18 @@ namespace Renderer{
     for (int i = 0 ; i < worldEntities.size() ; ++i){
       drawRectangle(worldEntities[i]->getPosition(), worldEntities[i]->getSize(),
           worldEntities[i]->getColor());
+    }
+    auto players = World::getPlayers();
+    for (int i = 0 ; i < players.size() ; ++i){
+      drawRectangle(players[i]->getPosition(), players[i]->getSize(),
+          players[i]->getColor());
+    }
+    auto worldWalls = World::getWalls();
+    for (int i = 0 ; i < worldWalls.size() ; ++i){
+      if(worldWalls[i] != nullptr){
+        drawRectangle(worldWalls[i]->getPosition(), worldWalls[i]->getSize(),
+            worldWalls[i]->getColor());
+      }
     }
     SDL_GL_SwapWindow(sdlWindow_);
   }
@@ -221,5 +233,12 @@ namespace Renderer{
 
   SDL_Renderer* getRenderer(){
     return sdlRenderer_; 
+  }
+
+  int getWindowWidth(){
+    return windowWidth;
+  }
+  int getWindowHeight(){
+    return windowHeight;
   }
 }

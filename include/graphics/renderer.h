@@ -16,6 +16,8 @@ namespace Renderer{
   SDL_Window* getWindow();
   SDL_Renderer* getRenderer();
   void drawRectangle(glm::vec2 position, glm::vec2 size, glm::vec3 color);
+  int getWindowWidth();
+  int getWindowHeight();
 
 }
 

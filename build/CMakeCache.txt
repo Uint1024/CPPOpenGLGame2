@@ -123,7 +123,7 @@ CMAKE_OBJCOPY:FILEPATH=C:/mingw-w64/i686-4.9.2-posix-dwarf-rt_v3-rev1/mingw32/bi
 CMAKE_OBJDUMP:FILEPATH=C:/mingw-w64/i686-4.9.2-posix-dwarf-rt_v3-rev1/mingw32/bin/objdump.exe
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=TestVimCpp
+CMAKE_PROJECT_NAME:STATIC=openglgame
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=C:/mingw-w64/i686-4.9.2-posix-dwarf-rt_v3-rev1/mingw32/bin/ranlib.exe
@@ -206,6 +206,12 @@ TestVimCpp_BINARY_DIR:STATIC=C:/Users/John/Documents/cpp/projecttestvim/build
 
 //Value Computed by CMake
 TestVimCpp_SOURCE_DIR:STATIC=C:/Users/John/Documents/cpp/projecttestvim
+
+//Value Computed by CMake
+openglgame_BINARY_DIR:STATIC=C:/Users/John/Documents/cpp/projecttestvim/build
+
+//Value Computed by CMake
+openglgame_SOURCE_DIR:STATIC=C:/Users/John/Documents/cpp/projecttestvim
 
 
 ########################

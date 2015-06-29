@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named wtf
+# Target rules for targets named openglgame
 
 # Build rule for target.
-wtf: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 wtf
-.PHONY : wtf
+openglgame: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 openglgame
+.PHONY : openglgame
 
 # fast build rule for target.
-wtf/fast:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/build
-.PHONY : wtf/fast
+openglgame/fast:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/build
+.PHONY : openglgame/fast
 
 src/entity.obj: src/entity.cpp.obj
 
@@ -129,7 +129,7 @@ src/entity.obj: src/entity.cpp.obj
 
 # target to build an object file
 src/entity.cpp.obj:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/entity.cpp.obj
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/entity.cpp.obj
 .PHONY : src/entity.cpp.obj
 
 src/entity.i: src/entity.cpp.i
@@ -138,7 +138,7 @@ src/entity.i: src/entity.cpp.i
 
 # target to preprocess a source file
 src/entity.cpp.i:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/entity.cpp.i
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/entity.cpp.i
 .PHONY : src/entity.cpp.i
 
 src/entity.s: src/entity.cpp.s
@@ -147,7 +147,7 @@ src/entity.s: src/entity.cpp.s
 
 # target to generate assembly for a file
 src/entity.cpp.s:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/entity.cpp.s
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/entity.cpp.s
 .PHONY : src/entity.cpp.s
 
 src/graphics/renderer.obj: src/graphics/renderer.cpp.obj
@@ -156,7 +156,7 @@ src/graphics/renderer.obj: src/graphics/renderer.cpp.obj
 
 # target to build an object file
 src/graphics/renderer.cpp.obj:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/graphics/renderer.cpp.obj
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/graphics/renderer.cpp.obj
 .PHONY : src/graphics/renderer.cpp.obj
 
 src/graphics/renderer.i: src/graphics/renderer.cpp.i
@@ -165,7 +165,7 @@ src/graphics/renderer.i: src/graphics/renderer.cpp.i
 
 # target to preprocess a source file
 src/graphics/renderer.cpp.i:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/graphics/renderer.cpp.i
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/graphics/renderer.cpp.i
 .PHONY : src/graphics/renderer.cpp.i
 
 src/graphics/renderer.s: src/graphics/renderer.cpp.s
@@ -174,7 +174,7 @@ src/graphics/renderer.s: src/graphics/renderer.cpp.s
 
 # target to generate assembly for a file
 src/graphics/renderer.cpp.s:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/graphics/renderer.cpp.s
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/graphics/renderer.cpp.s
 .PHONY : src/graphics/renderer.cpp.s
 
 src/graphics/shader.obj: src/graphics/shader.cpp.obj
@@ -183,7 +183,7 @@ src/graphics/shader.obj: src/graphics/shader.cpp.obj
 
 # target to build an object file
 src/graphics/shader.cpp.obj:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/graphics/shader.cpp.obj
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/graphics/shader.cpp.obj
 .PHONY : src/graphics/shader.cpp.obj
 
 src/graphics/shader.i: src/graphics/shader.cpp.i
@@ -192,7 +192,7 @@ src/graphics/shader.i: src/graphics/shader.cpp.i
 
 # target to preprocess a source file
 src/graphics/shader.cpp.i:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/graphics/shader.cpp.i
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/graphics/shader.cpp.i
 .PHONY : src/graphics/shader.cpp.i
 
 src/graphics/shader.s: src/graphics/shader.cpp.s
@@ -201,7 +201,7 @@ src/graphics/shader.s: src/graphics/shader.cpp.s
 
 # target to generate assembly for a file
 src/graphics/shader.cpp.s:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/graphics/shader.cpp.s
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/graphics/shader.cpp.s
 .PHONY : src/graphics/shader.cpp.s
 
 src/graphics/shaderProgram.obj: src/graphics/shaderProgram.cpp.obj
@@ -210,7 +210,7 @@ src/graphics/shaderProgram.obj: src/graphics/shaderProgram.cpp.obj
 
 # target to build an object file
 src/graphics/shaderProgram.cpp.obj:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/graphics/shaderProgram.cpp.obj
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/graphics/shaderProgram.cpp.obj
 .PHONY : src/graphics/shaderProgram.cpp.obj
 
 src/graphics/shaderProgram.i: src/graphics/shaderProgram.cpp.i
@@ -219,7 +219,7 @@ src/graphics/shaderProgram.i: src/graphics/shaderProgram.cpp.i
 
 # target to preprocess a source file
 src/graphics/shaderProgram.cpp.i:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/graphics/shaderProgram.cpp.i
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/graphics/shaderProgram.cpp.i
 .PHONY : src/graphics/shaderProgram.cpp.i
 
 src/graphics/shaderProgram.s: src/graphics/shaderProgram.cpp.s
@@ -228,7 +228,7 @@ src/graphics/shaderProgram.s: src/graphics/shaderProgram.cpp.s
 
 # target to generate assembly for a file
 src/graphics/shaderProgram.cpp.s:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/graphics/shaderProgram.cpp.s
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/graphics/shaderProgram.cpp.s
 .PHONY : src/graphics/shaderProgram.cpp.s
 
 src/input.obj: src/input.cpp.obj
@@ -237,7 +237,7 @@ src/input.obj: src/input.cpp.obj
 
 # target to build an object file
 src/input.cpp.obj:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/input.cpp.obj
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/input.cpp.obj
 .PHONY : src/input.cpp.obj
 
 src/input.i: src/input.cpp.i
@@ -246,7 +246,7 @@ src/input.i: src/input.cpp.i
 
 # target to preprocess a source file
 src/input.cpp.i:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/input.cpp.i
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/input.cpp.i
 .PHONY : src/input.cpp.i
 
 src/input.s: src/input.cpp.s
@@ -255,7 +255,7 @@ src/input.s: src/input.cpp.s
 
 # target to generate assembly for a file
 src/input.cpp.s:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/input.cpp.s
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/input.cpp.s
 .PHONY : src/input.cpp.s
 
 src/main.obj: src/main.cpp.obj
@@ -264,7 +264,7 @@ src/main.obj: src/main.cpp.obj
 
 # target to build an object file
 src/main.cpp.obj:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/main.cpp.obj
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/main.cpp.obj
 .PHONY : src/main.cpp.obj
 
 src/main.i: src/main.cpp.i
@@ -273,7 +273,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/main.cpp.i
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -282,7 +282,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/main.cpp.s
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 src/world.obj: src/world.cpp.obj
@@ -291,7 +291,7 @@ src/world.obj: src/world.cpp.obj
 
 # target to build an object file
 src/world.cpp.obj:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/world.cpp.obj
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/world.cpp.obj
 .PHONY : src/world.cpp.obj
 
 src/world.i: src/world.cpp.i
@@ -300,7 +300,7 @@ src/world.i: src/world.cpp.i
 
 # target to preprocess a source file
 src/world.cpp.i:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/world.cpp.i
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/world.cpp.i
 .PHONY : src/world.cpp.i
 
 src/world.s: src/world.cpp.s
@@ -309,7 +309,7 @@ src/world.s: src/world.cpp.s
 
 # target to generate assembly for a file
 src/world.cpp.s:
-	$(MAKE) -f CMakeFiles/wtf.dir/build.make CMakeFiles/wtf.dir/src/world.cpp.s
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/world.cpp.s
 .PHONY : src/world.cpp.s
 
 # Help Target
@@ -320,7 +320,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... wtf"
+	@echo "... openglgame"
 	@echo "... src/entity.obj"
 	@echo "... src/entity.i"
 	@echo "... src/entity.s"

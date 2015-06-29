@@ -25,6 +25,22 @@ class Entity
       return mColor;
     }
 
+    void moveY(int movement){
+      mPosition.y += movement;
+    }
+
+    void moveX(int movement){
+      mPosition.x += movement;
+    }
+    void move(int xMovement, int yMovement) {
+      mPosition.y += yMovement;
+      mPosition.x += xMovement;
+    }
+
+    void moveAbsolute(int x, int y){
+      mPosition.x = x;
+      mPosition.y = y;
+    }
 
 };
 #endif
