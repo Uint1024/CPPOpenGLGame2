@@ -1,0 +1,42 @@
+cmake_minimum_required(VERSION 3.3)
+
+project("TestVimCpp")
+
+add_definitions(-std=c++14 -D GLEW_STATIC)
+
+find_package(OpenGL REQUIRED)
+
+set(INCLUDE_DIR ${CMAKE_CURRENT_BINARY_DIR}/include/)
+set(GLEW_INCLUDE_DIR C:/glew-1.12.0/include)
+set(GLM_INCLUDE_DIR C:/glm/glm)
+
+set(SDL2_LIBRARY mingw32 SDL2main SDL2)
+set(GLEW_LIBRARY glew32s)
+
+set(SDL_LIBRARY_DIR C:/SDL2-2.0.3/lib/)
+set(GLEW_LIBRARY_DIR C:/glew-1.12.0/lib/Release/Win32)
+
+link_directories(${SDL_LIBRARY_DIR} ${GLEW_LIBRARY_DIR})
+
+INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS} 
+  ${OPENGL_INCLUDE_DIRS} 
+  ${GLEW_INCLUDE_DIR}
+  ${GLM_INCLUDE_DIR})
+
+
+include_directories(include)
+include_directories(C:/SDL2-2.0.3/include/SDL2)
+add_executable(wtf src/main.cpp 
+  src/entity.cpp 
+  #src/icontroller.cpp 
+  src/input.cpp
+  src/world.cpp
+  src/graphics/renderer.cpp
+  src/graphics/shader.cpp
+  src/graphics/shaderProgram.cpp
+  )
+
+
+target_link_libraries(wtf ${SDL2_LIBRARY} ${GLEW_LIBRARY} ${OPENGL_LIBRARIES})
+
+
