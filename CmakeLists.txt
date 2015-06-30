@@ -9,19 +9,24 @@ find_package(OpenGL REQUIRED)
 set(INCLUDE_DIR ${CMAKE_CURRENT_BINARY_DIR}/include/)
 set(GLEW_INCLUDE_DIR C:/glew-1.12.0/include)
 set(GLM_INCLUDE_DIR C:/glm/glm)
+set(SOIL_INCLUDE_DIR C:/SOIL/src)
 
 set(SDL2_LIBRARY mingw32 SDL2main SDL2)
 set(GLEW_LIBRARY glew32s)
+set(SOIL_LIBRARY libSOIL.a)
 
 set(SDL_LIBRARY_DIR C:/SDL2-2.0.3/lib/)
 set(GLEW_LIBRARY_DIR C:/glew-1.12.0/lib/Release/Win32)
+set(SOIL_LIBRARY_DIR C:/SOIL/lib)
 
-link_directories(${SDL_LIBRARY_DIR} ${GLEW_LIBRARY_DIR})
+
+link_directories(${SDL_LIBRARY_DIR} ${GLEW_LIBRARY_DIR} ${SOIL_LIBRARY_DIR})
 
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS} 
   ${OPENGL_INCLUDE_DIRS} 
   ${GLEW_INCLUDE_DIR}
-  ${GLM_INCLUDE_DIR})
+  ${GLM_INCLUDE_DIR}
+  ${SOIL_INCLUDE_DIR})
 
 
 include_directories(include)
@@ -34,9 +39,13 @@ add_executable(openglgame src/main.cpp
   src/graphics/renderer.cpp
   src/graphics/shader.cpp
   src/graphics/shaderProgram.cpp
+  src/player.cpp
   )
 
 
-target_link_libraries(openglgame ${SDL2_LIBRARY} ${GLEW_LIBRARY} ${OPENGL_LIBRARIES})
+target_link_libraries(openglgame ${SDL2_LIBRARY} 
+  ${GLEW_LIBRARY} ${SOIL_LIBRARY} 
+  ${OPENGL_LIBRARIES})
+  
 
 

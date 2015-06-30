@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/John/Documents/cpp/projecttestvim/src/graphics/shaderProgram.cpp" "C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles/openglgame.dir/src/graphics/shaderProgram.cpp.obj"
   "C:/Users/John/Documents/cpp/projecttestvim/src/input.cpp" "C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles/openglgame.dir/src/input.cpp.obj"
   "C:/Users/John/Documents/cpp/projecttestvim/src/main.cpp" "C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles/openglgame.dir/src/main.cpp.obj"
+  "C:/Users/John/Documents/cpp/projecttestvim/src/player.cpp" "C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles/openglgame.dir/src/player.cpp.obj"
   "C:/Users/John/Documents/cpp/projecttestvim/src/world.cpp" "C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles/openglgame.dir/src/world.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
@@ -18,6 +19,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "C:/glew-1.12.0/include"
   "C:/glm/glm"
+  "C:/SOIL/src"
   "../include"
   "C:/SDL2-2.0.3/include/SDL2"
   )

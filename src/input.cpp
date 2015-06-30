@@ -1,13 +1,41 @@
+#include "input.h"
+#include <array>
 #include <iostream>
 #include <SDL.h>
 #include "world.h"
 #include "entity.h"
 
+
+
 namespace Input{
   SDL_Event e;
-  bool keyDown[300] = {false};
+  //bool keyDown[300] = {false};
+  std::array<bool, 300> keyDown = {false};
+  std::array<bool, 15> mouseButtonDown = {false};
+
+  //key bindings for 4 players :
+  //bind a key to a controller type (keyboard, mouse, gamepad...) 
+  std::array<std::array<ControllerType, (int)Key::NumKeys>, 4> keyControllerType;
+  //bind one of the controller's key/button to a game key
+  std::array<std::array<int, (int)Key::NumKeys>, 4> keyBindings;
+
+
 
   void init() {
+    int playerId = 0;
+    keyBindings[playerId][(int)Key::Right] =        SDL_SCANCODE_D;
+    keyBindings[playerId][(int)Key::Down] =         SDL_SCANCODE_S;
+    keyBindings[playerId][(int)Key::Left] =         SDL_SCANCODE_A;
+    keyBindings[playerId][(int)Key::Up] =           SDL_SCANCODE_W;
+    keyBindings[playerId][(int)Key::Shoot] =        SDL_BUTTON_LEFT;
+
+    keyControllerType[playerId][(int)Key::Right] =  ControllerType::Keyboard;
+    keyControllerType[playerId][(int)Key::Down] =   ControllerType::Keyboard;
+    keyControllerType[playerId][(int)Key::Left] =   ControllerType::Keyboard;
+    keyControllerType[playerId][(int)Key::Up] =     ControllerType::Keyboard;
+    keyControllerType[playerId][(int)Key::Shoot] =  ControllerType::Mouse;
+
+
   }
 
   void pollEvents(bool& runGame) {
@@ -22,165 +50,32 @@ namespace Input{
         case SDL_KEYUP:
           keyDown[e.key.keysym.scancode] = false;
           break;
+        case SDL_MOUSEBUTTONDOWN:
+          mouseButtonDown[e.button.button] = true;
+          break;
+        case SDL_MOUSEBUTTONUP:
+          mouseButtonDown[e.button.button] = false;
+          break;
       }
-    }
-    int xMov, yMov = 0;
-
-    if(keyDown[SDL_SCANCODE_S]){
-      //World::getPlayers()[0]->moveY(5);
-      yMov = 5;
-    }
-    if(keyDown[SDL_SCANCODE_W]){
-      //World::getPlayers()[0]->moveY(-5);
-      yMov = -5;
-    }
-    if(keyDown[SDL_SCANCODE_A]){
-      //World::getPlayers()[0]->moveX(-5);
-      xMov = -5;
-    }
-    if(keyDown[SDL_SCANCODE_D]){
-      //World::getPlayers()[0]->moveX(5);
-      xMov = 5;
-    }
-    
-    auto pPlayer1 = World::getPlayers()[0];
-    auto rWalls = World::getWalls();
-    
-    //collision algorithm
-    //get coordinate of forward facing edge 
-    int minX, maxX, minY, maxY;
-    Entity* pWallFound = nullptr;
-    if(xMov < 0){
-      maxX = pPlayer1->getPosition().x / World::getTileSize();
-      minY = pPlayer1->getPosition().y / World::getTileSize();
-      maxY = (pPlayer1->getPosition().y + pPlayer1->getSize().y) /
-        World::getTileSize();
-      for(int y = minY ; y < maxY && !pWallFound ; ++y){
-        for(int x = maxX ; x > 0 && !pWallFound ; --x){
-          if(rWalls[y * World::getMapWidth() + x] != nullptr){
-            pWallFound = rWalls[y * World::getMapWidth() + x];
-            std::cout << "Found wall at" << x << ":" << y << std::endl;
-          }
-        }
-      }
-      if(pWallFound != nullptr){
-        int distance = (pWallFound->getPosition().x +
-            pWallFound->getSize().x) - pPlayer1->getPosition().x;
-          std::cout << "Distance = " << distance << ", xMov = " << xMov << std::endl;
-        if(xMov < distance){
-          xMov = distance;
-        }
-      }
-    }
-    pWallFound = nullptr;
-    if(xMov > 0){
-      minX = (pPlayer1->getPosition().x + pPlayer1->getSize().x) / 
-        World::getTileSize();
-      minY = pPlayer1->getPosition().y / World::getTileSize();
-      maxY = (pPlayer1->getPosition().y + pPlayer1->getSize().y) /
-        World::getTileSize();
-      for(int y = minY ; y < maxY && !pWallFound ; ++y){
-        for(int x = minX ; x < World::getMapWidth() && !pWallFound; ++x){
-          if(rWalls[y * World::getMapWidth() + x] != nullptr){
-            pWallFound = rWalls[y * World::getMapWidth() + x];
-            std::cout << "Found wall at" << x << ":" << y << std::endl;
-          }
-        }
-      }
-      if(pWallFound != nullptr){
-        int distance = pWallFound->getPosition().x -
-          (pPlayer1->getPosition().x + pPlayer1->getSize().x);
-        std::cout << "Distance = " << distance << ", xMov = " << xMov << std::endl;
-        if(xMov > distance){
-          xMov = distance;
-        }
-      }
-    }
-    pWallFound = nullptr;
-
-    if(yMov < 0){
-      maxY = pPlayer1->getPosition().y / World::getTileSize();
-      minX = pPlayer1->getPosition().x / World::getTileSize();
-      maxX = (pPlayer1->getPosition().x + pPlayer1->getSize().x - 1) /
-        World::getTileSize();
-      std::cout << minX << " " << maxX << std::endl;
-      for(int x = minX ; x <= maxX && !pWallFound ; ++x){
-        for(int y = maxY ; y >= 0 && !pWallFound; --y){
-          if(rWalls[y * World::getMapWidth() + x] != nullptr){
-            pWallFound = rWalls[y * World::getMapWidth() + x];
-            std::cout << "Found wall at" << x << ":" << y << std::endl;
-          }
-        }
-      }
-      if(pWallFound != nullptr){
-        int distance = (pWallFound->getPosition().y +
-            pWallFound->getSize().y) - pPlayer1->getPosition().y;
-          std::cout << "Distance = " << distance << ", xMov = " << xMov << std::endl;
-        if(yMov < distance){
-          yMov = distance;
-        }
-      }
-    }
-    /*if(xMov > 0){
-      minX = (pPlayer1->getPosition().x + pPlayer1->getSize().x) / 
-        World::getTileSize();
-      minY = pPlayer1->getPosition().y / World::getTileSize();
-      maxY = (pPlayer1->getPosition().y + pPlayer1->getSize().y) /
-        World::getTileSize();
-      for(int y = minY ; y < maxY ; ++y && !pWallFound){
-        for(int x = minX ; x < World::getMapWidth(); ++x && !pWallFound){
-          if(rWalls[y * World::getMapWidth() + x] != nullptr){
-            pWallFound = rWalls[y * World::getMapWidth() + x];
-            std::cout << "Found wall at" << x << ":" << y << std::endl;
-          }
-        }
-      }
-      if(pWallFound != nullptr){
-        int distance = pWallFound->getPosition().x -
-          (pPlayer1->getPosition().x + pPlayer1->getSize().x);
-        std::cout << "Distance = " << distance << ", xMov = " << xMov << std::endl;
-        if(xMov > distance){
-          xMov = distance;
-        }
-      }
-    }*/
-    /*if(xMov < 0){
-      int leftCoord = pPlayer1->getPosition().x;
-      int leftCoordTile = leftCoord / World::getTileSize();
-
-      //figure out which horizontal row the bbox intersects with
-      int minHorizontal = pPlayer1->getPosition().y / World::getTileSize();
-      int maxHorizontal = (pPlayer1->getPosition().y + pPlayer1->getSize().y) /
-        World::getTileSize();
-      
-      //scan along the horizontal lines and find first static obstacle
-      Entity* pWallFound = nullptr;
-      for(int y = minHorizontal ; y < maxHorizontal ; ++y && !pWallFound){
-        for(int x = leftCoordTile ; x > 0 ; --x && !pWallFound){
-          if(rWalls[y * World::getTileSize() + x] != nullptr){
-            pWallFound = rWalls[y * World::getTileSize() + x];
-            std::cout << "Found wall at" << x << ":" << y << std::endl;
-          }
-        }
-      }
-
-      //total movement along the direction is minimum between closest wall
-      //and amount of movement from input
-      int distance = (pWallFound->getPosition().x +
-          pWallFound->getSize().x) - pPlayer1->getPosition().x;
-        std::cout << "Distance = " << distance << ", xMov = " << xMov << std::endl;
-      if(xMov < distance){
-        xMov = distance;
-      }
-    }*/
-
-    pPlayer1->move(xMov, yMov);
-    if(keyDown[SDL_SCANCODE_DOWN]){
-      World::getPlayers()[1]->moveY(5);
-    }
-    if(keyDown[SDL_SCANCODE_UP]){
-      World::getPlayers()[1]->moveY(-5);
     }
   }
 
+  bool isKeyDown(int scancode){
+    //return keyDown[scancode];
+  }
+
+  bool playerIsKeyDown(int playerId, Key keyId){
+    if(keyControllerType[playerId][(int)keyId] == ControllerType::Keyboard){
+      return keyDown[keyBindings[playerId][(int)keyId]];  
+    }
+    else if(keyControllerType[playerId][(int)keyId] == 
+        ControllerType::Mouse){
+      return mouseButtonDown[keyBindings[playerId][(int)keyId]];
+    }
+    else {
+      std::cout << "Input::playerIsKeyDown(): unknown key!" << std::endl;
+    }
+  }
 }
+
+

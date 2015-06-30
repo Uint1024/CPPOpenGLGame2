@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/openglgame.dir/src/graphics/renderer.cpp.obj"
   "CMakeFiles/openglgame.dir/src/graphics/shader.cpp.obj"
   "CMakeFiles/openglgame.dir/src/graphics/shaderProgram.cpp.obj"
+  "CMakeFiles/openglgame.dir/src/player.cpp.obj"
   "openglgame.pdb"
   "openglgame.exe"
   "openglgame.exe.manifest"

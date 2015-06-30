@@ -87,7 +87,10 @@ CMakeFiles/openglgame.dir/src/graphics/renderer.cpp.obj
  ../include/graphics/renderer.h
  ../include/graphics/shader.h
  ../include/graphics/shaderProgram.h
+ ../include/graphics/sprite.h
  ../include/icontroller.h
+ ../include/input.h
+ ../include/player.h
  ../include/world.h
  C:/SDL2-2.0.3/include/SDL2/SDL.h
  C:/SDL2-2.0.3/include/SDL2/SDL_assert.h
@@ -133,6 +136,7 @@ CMakeFiles/openglgame.dir/src/graphics/renderer.cpp.obj
  C:/SDL2-2.0.3/include/SDL2/SDL_video.h
  C:/SDL2-2.0.3/include/SDL2/begin_code.h
  C:/SDL2-2.0.3/include/SDL2/close_code.h
+ C:/SOIL/src/SOIL.h
  C:/Users/John/Documents/cpp/projecttestvim/src/graphics/renderer.cpp
  C:/glew-1.12.0/include/GL/glew.h
  C:/glm/glm/common.hpp
@@ -489,6 +493,7 @@ CMakeFiles/openglgame.dir/src/graphics/shaderProgram.cpp.obj
 CMakeFiles/openglgame.dir/src/input.cpp.obj
  ../include/entity.h
  ../include/icontroller.h
+ ../include/input.h
  ../include/world.h
  C:/SDL2-2.0.3/include/SDL2/SDL.h
  C:/SDL2-2.0.3/include/SDL2/SDL_assert.h
@@ -743,10 +748,147 @@ CMakeFiles/openglgame.dir/src/main.cpp.obj
  C:/glm/glm/vec3.hpp
  C:/glm/glm/vec4.hpp
  C:/glm/glm/vector_relational.hpp
+CMakeFiles/openglgame.dir/src/player.cpp.obj
+ ../include/entity.h
+ ../include/graphics/renderer.h
+ ../include/icontroller.h
+ ../include/input.h
+ ../include/player.h
+ C:/SDL2-2.0.3/include/SDL2/SDL.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_assert.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_atomic.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_audio.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_blendmode.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_clipboard.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_config.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_cpuinfo.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_endian.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_error.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_events.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_filesystem.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_gamecontroller.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_gesture.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_haptic.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_hints.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_joystick.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_keyboard.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_keycode.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_loadso.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_log.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_main.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_messagebox.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_mouse.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_mutex.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_opengl.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_pixels.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_platform.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_power.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_quit.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_rect.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_render.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_rwops.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_scancode.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_stdinc.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_surface.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_system.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_thread.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_timer.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_touch.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_version.h
+ C:/SDL2-2.0.3/include/SDL2/SDL_video.h
+ C:/SDL2-2.0.3/include/SDL2/begin_code.h
+ C:/SDL2-2.0.3/include/SDL2/close_code.h
+ C:/Users/John/Documents/cpp/projecttestvim/src/player.cpp
+ C:/glm/glm/common.hpp
+ C:/glm/glm/detail/_fixes.hpp
+ C:/glm/glm/detail/_swizzle.hpp
+ C:/glm/glm/detail/_swizzle_func.hpp
+ C:/glm/glm/detail/_vectorize.hpp
+ C:/glm/glm/detail/func_common.hpp
+ C:/glm/glm/detail/func_common.inl
+ C:/glm/glm/detail/func_exponential.hpp
+ C:/glm/glm/detail/func_exponential.inl
+ C:/glm/glm/detail/func_geometric.hpp
+ C:/glm/glm/detail/func_geometric.inl
+ C:/glm/glm/detail/func_integer.hpp
+ C:/glm/glm/detail/func_integer.inl
+ C:/glm/glm/detail/func_matrix.hpp
+ C:/glm/glm/detail/func_matrix.inl
+ C:/glm/glm/detail/func_packing.hpp
+ C:/glm/glm/detail/func_packing.inl
+ C:/glm/glm/detail/func_trigonometric.hpp
+ C:/glm/glm/detail/func_trigonometric.inl
+ C:/glm/glm/detail/func_vector_relational.hpp
+ C:/glm/glm/detail/func_vector_relational.inl
+ C:/glm/glm/detail/precision.hpp
+ C:/glm/glm/detail/setup.hpp
+ C:/glm/glm/detail/type_float.hpp
+ C:/glm/glm/detail/type_half.hpp
+ C:/glm/glm/detail/type_half.inl
+ C:/glm/glm/detail/type_int.hpp
+ C:/glm/glm/detail/type_mat.hpp
+ C:/glm/glm/detail/type_mat2x2.hpp
+ C:/glm/glm/detail/type_mat2x2.inl
+ C:/glm/glm/detail/type_mat2x3.hpp
+ C:/glm/glm/detail/type_mat2x3.inl
+ C:/glm/glm/detail/type_mat2x4.hpp
+ C:/glm/glm/detail/type_mat2x4.inl
+ C:/glm/glm/detail/type_mat3x2.hpp
+ C:/glm/glm/detail/type_mat3x2.inl
+ C:/glm/glm/detail/type_mat3x3.hpp
+ C:/glm/glm/detail/type_mat3x3.inl
+ C:/glm/glm/detail/type_mat3x4.hpp
+ C:/glm/glm/detail/type_mat3x4.inl
+ C:/glm/glm/detail/type_mat4x2.hpp
+ C:/glm/glm/detail/type_mat4x2.inl
+ C:/glm/glm/detail/type_mat4x3.hpp
+ C:/glm/glm/detail/type_mat4x3.inl
+ C:/glm/glm/detail/type_mat4x4.hpp
+ C:/glm/glm/detail/type_mat4x4.inl
+ C:/glm/glm/detail/type_vec.hpp
+ C:/glm/glm/detail/type_vec1.hpp
+ C:/glm/glm/detail/type_vec1.inl
+ C:/glm/glm/detail/type_vec2.hpp
+ C:/glm/glm/detail/type_vec2.inl
+ C:/glm/glm/detail/type_vec3.hpp
+ C:/glm/glm/detail/type_vec3.inl
+ C:/glm/glm/detail/type_vec4.hpp
+ C:/glm/glm/detail/type_vec4.inl
+ C:/glm/glm/exponential.hpp
+ C:/glm/glm/fwd.hpp
+ C:/glm/glm/geometric.hpp
+ C:/glm/glm/glm.hpp
+ C:/glm/glm/gtc/constants.hpp
+ C:/glm/glm/gtc/constants.inl
+ C:/glm/glm/gtc/matrix_transform.hpp
+ C:/glm/glm/gtc/matrix_transform.inl
+ C:/glm/glm/gtc/quaternion.hpp
+ C:/glm/glm/gtc/quaternion.inl
+ C:/glm/glm/gtc/type_ptr.hpp
+ C:/glm/glm/gtc/type_ptr.inl
+ C:/glm/glm/integer.hpp
+ C:/glm/glm/mat2x2.hpp
+ C:/glm/glm/mat2x3.hpp
+ C:/glm/glm/mat2x4.hpp
+ C:/glm/glm/mat3x2.hpp
+ C:/glm/glm/mat3x3.hpp
+ C:/glm/glm/mat3x4.hpp
+ C:/glm/glm/mat4x2.hpp
+ C:/glm/glm/mat4x3.hpp
+ C:/glm/glm/mat4x4.hpp
+ C:/glm/glm/matrix.hpp
+ C:/glm/glm/packing.hpp
+ C:/glm/glm/trigonometric.hpp
+ C:/glm/glm/vec2.hpp
+ C:/glm/glm/vec3.hpp
+ C:/glm/glm/vec4.hpp
+ C:/glm/glm/vector_relational.hpp
 CMakeFiles/openglgame.dir/src/world.cpp.obj
  ../include/entity.h
  ../include/graphics/renderer.h
  ../include/icontroller.h
+ ../include/input.h
+ ../include/player.h
  ../include/world.h
  C:/SDL2-2.0.3/include/SDL2/SDL.h
  C:/SDL2-2.0.3/include/SDL2/SDL_assert.h

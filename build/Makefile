@@ -285,6 +285,33 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/player.obj: src/player.cpp.obj
+
+.PHONY : src/player.obj
+
+# target to build an object file
+src/player.cpp.obj:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/player.cpp.obj
+.PHONY : src/player.cpp.obj
+
+src/player.i: src/player.cpp.i
+
+.PHONY : src/player.i
+
+# target to preprocess a source file
+src/player.cpp.i:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/player.cpp.i
+.PHONY : src/player.cpp.i
+
+src/player.s: src/player.cpp.s
+
+.PHONY : src/player.s
+
+# target to generate assembly for a file
+src/player.cpp.s:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/player.cpp.s
+.PHONY : src/player.cpp.s
+
 src/world.obj: src/world.cpp.obj
 
 .PHONY : src/world.obj
@@ -339,6 +366,9 @@ help:
 	@echo "... src/main.obj"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/player.obj"
+	@echo "... src/player.i"
+	@echo "... src/player.s"
 	@echo "... src/world.obj"
 	@echo "... src/world.i"
 	@echo "... src/world.s"

@@ -11,6 +11,8 @@ glm.hpp
 -
 icontroller.h
 ../include/icontroller.h
+string
+-
 
 ../include/graphics/renderer.h
 SDL_opengl.h
@@ -22,6 +24,8 @@ glm.hpp
 gtc/matrix_transform.hpp
 -
 gtc/type_ptr.hpp
+-
+string
 -
 
 ../include/graphics/shader.h
@@ -36,8 +40,18 @@ GL/glew.h
 graphics/shader.h
 ../include/graphics/graphics/shader.h
 
+../include/graphics/sprite.h
+
 ../include/icontroller.h
 
+../include/input.h
+
+../include/player.h
+glm.hpp
+-
+entity.h
+../include/entity.h
+input.h
 ../include/input.h
 
 ../include/world.h
@@ -616,6 +630,8 @@ C:/SDL2-2.0.3/include/SDL2/begin_code.h
 
 C:/SDL2-2.0.3/include/SDL2/close_code.h
 
+C:/SOIL/src/SOIL.h
+
 C:/Users/John/Documents/cpp/projecttestvim/src/entity.cpp
 iostream
 -
@@ -631,8 +647,12 @@ fstream
 -
 vector
 -
+map
+-
 SDL.h
 C:/Users/John/Documents/cpp/projecttestvim/src/graphics/SDL.h
+SOIL.h
+-
 GL/glew.h
 -
 SDL_opengl.h
@@ -647,8 +667,14 @@ entity.h
 C:/Users/John/Documents/cpp/projecttestvim/src/graphics/entity.h
 world.h
 C:/Users/John/Documents/cpp/projecttestvim/src/graphics/world.h
+player.h
+C:/Users/John/Documents/cpp/projecttestvim/src/graphics/player.h
+graphics/sprite.h
+C:/Users/John/Documents/cpp/projecttestvim/src/graphics/graphics/sprite.h
 
 C:/Users/John/Documents/cpp/projecttestvim/src/graphics/shader.cpp
+iostream
+-
 GL/glew.h
 -
 graphics/shader.h
@@ -663,6 +689,10 @@ graphics/renderer.h
 C:/Users/John/Documents/cpp/projecttestvim/src/graphics/graphics/renderer.h
 
 C:/Users/John/Documents/cpp/projecttestvim/src/input.cpp
+input.h
+C:/Users/John/Documents/cpp/projecttestvim/src/input.h
+array
+-
 iostream
 -
 SDL.h
@@ -682,7 +712,17 @@ C:/Users/John/Documents/cpp/projecttestvim/src/graphics/renderer.h
 input.h
 C:/Users/John/Documents/cpp/projecttestvim/src/input.h
 
+C:/Users/John/Documents/cpp/projecttestvim/src/player.cpp
+iostream
+-
+player.h
+C:/Users/John/Documents/cpp/projecttestvim/src/player.h
+graphics/renderer.h
+C:/Users/John/Documents/cpp/projecttestvim/src/graphics/renderer.h
+
 C:/Users/John/Documents/cpp/projecttestvim/src/world.cpp
+fstream
+-
 glm.hpp
 -
 vector
@@ -695,6 +735,8 @@ world.h
 C:/Users/John/Documents/cpp/projecttestvim/src/world.h
 entity.h
 C:/Users/John/Documents/cpp/projecttestvim/src/entity.h
+player.h
+C:/Users/John/Documents/cpp/projecttestvim/src/player.h
 
 C:/glew-1.12.0/include/GL/glew.h
 stddef.h

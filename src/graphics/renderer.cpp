@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <map>
 #include "SDL.h"
+#include <SOIL.h>
 
 #include <GL/glew.h>
 #include <SDL_opengl.h>
@@ -10,6 +12,8 @@
 #include "graphics/shaderProgram.h"
 #include "entity.h"
 #include "world.h"
+#include "player.h"
+#include "graphics/sprite.h"
 
 namespace OpenGLUtils {
   /*Don't forget to free() the point after usage!*/
@@ -84,11 +88,27 @@ namespace Renderer{
     0.0f,  0.5f,  0.0f
   };
   GLfloat rectangleVertices[] = {
-  0.0f, 0.0f, 0.0f,//top left
-  1.0f,  0.0f, 0.0f,//top right
-  0.0f, 1.0f,  0.0f,//bottom left
-  1.0f,  1.0f,  0.0f//bottom right
+  0.0f, 0.0f, 0.0f,   0.0f, 1.0f,//top left
+  1.0f, 0.0f, 0.0f,   1.0f, 1.0f,//top right
+  0.0f, 1.0f, 0.0f,   0.0f, 0.0f,//bottom left
+  1.0f, 1.0f, 0.0f,   1.0f, 0.0f//bottom right
   };
+
+  GLfloat spritePositionArray[] = {
+  0.0f, 1.0f,
+  0.25f, 1.0f,
+  0.0f, 0.75f,
+  0.25f, 0.75f
+  };
+
+  GLfloat spriteCoordinates[nbTextures][8]; 
+  GLfloat someArray[] = {
+    0.0f, 1.0f,
+    0.25f, 1.0f,
+    0.0f, 0.75f,
+    0.25f, 0.75f
+  };
+
   GLfloat blueColor[] = {
     0.0f, 1.0f, 0.0f
   };
@@ -97,16 +117,24 @@ namespace Renderer{
     1, 2, 3
   };
 
+  std::array<GLuint, nbTextures> spriteVboMap;
   GLuint triangleVbo;
   GLuint triangleVao;
   GLuint rectangleEbo;
   GLuint rectangleVbo;
+  GLuint spritePositionVbo;
   GLuint rectangleVao;
   ShaderProgram* glProgram1;
   glm::mat4 projectionMatrix;
+  GLuint texture;
+  std::vector<std::string> textureNames;
 
+
+  std::map<std::string, glm::vec2> spritePosition;
+  std::map<std::string, glm::vec2> spriteSize;
 
   void init(){
+
     windowWidth =  1000;
     windowHeight = 1000;
 
@@ -138,14 +166,61 @@ namespace Renderer{
     glViewport( 0.0f, 0.0f, windowWidth, windowHeight);
     glEnable(GL_DEPTH_TEST);
 
+    //create shaders and a shader program with them
+    Shader shadertest = Shader(GL_VERTEX_SHADER, "shader/vertex_shader.gl");
+    
+    Shader shadertest2 = Shader(GL_FRAGMENT_SHADER, "shader/fragment_shader.gl");
+    glProgram1 = new ShaderProgram(shadertest, shadertest2);
+    glProgram1->use();
+
+    //TEXTURE / SPRITE SHEET
+    int width, height;
+    unsigned char* image  = SOIL_load_image("graphics/spriteSheet.png",
+        &width,
+        &height,
+        0,
+        SOIL_LOAD_RGB);
+
+    //chaque texture fait 128x128
+    float texSize = 128.0f;
+    float left = 0.0f;
+    float top = 0.0f;
+    for (int i = 0 ; i < nbTextures ; ++i){
+      float right = left + texSize;
+      float bottom = top + texSize;
+      spriteCoordinates[i][0] = left / width;
+      spriteCoordinates[i][1] = 1.0f - (top / height);
+      spriteCoordinates[i][2] = right / width;
+      spriteCoordinates[i][3] = 1.0f - top / height;
+      spriteCoordinates[i][4] = left / width;
+      spriteCoordinates[i][5] = 1.0f - bottom / height;
+      spriteCoordinates[i][6] = right / width;
+      spriteCoordinates[i][7] = 1.0f - bottom / height;
+
+      left += 128.0f;
+    }
+
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+        GL_UNSIGNED_BYTE, image);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    SOIL_free_image_data(image);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    //VAO / VBO / VEO
     //generate vertex array object
     glGenVertexArrays(1, &rectangleVao);
 
     //generate vertex buffer object 
     glGenBuffers(1, &rectangleVbo);
+    glGenBuffers(1, &spritePositionVbo);
 
     //generate element buffer object
     glGenBuffers(1, &rectangleEbo);
+    
+    glGenBuffers(1, &spriteVboMap[texPlayer]);
+    glGenBuffers(1, &spriteVboMap[texWall]);
 
     //bind vao, it will then "link" the ebo, vbo and
     //vertex attrib pointer config to the vao!
@@ -155,26 +230,52 @@ namespace Renderer{
       glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(rectangleIndices),
           rectangleIndices, GL_STATIC_DRAW);
 
-      //bind vbo and put rectangle vertices in it
       glBindBuffer(GL_ARRAY_BUFFER, rectangleVbo);
-      glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), rectangleVertices, GL_STATIC_DRAW); 
+      glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices),
+          rectangleVertices, GL_STATIC_DRAW);
+      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat),
+          (GLvoid*)0);
 
-      //tell OpenGL how to interpret the vertex data
-      //in the currently bound vao
-      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
-        (GLvoid*)0);
-      //enable vertex attribute (disabled by default)
       glEnableVertexAttribArray(0);
+
+      
+      //generate all the vbo
+      for(int name = 0 ; name < nbTextures ; ++name){
+        //bind vbo and put rectangle vertices in it
+        glBindBuffer(GL_ARRAY_BUFFER, spriteVboMap[name]);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(spriteCoordinates[name]), spriteCoordinates[name], GL_STATIC_DRAW); 
+
+        //tell OpenGL how to interpret the vertex data
+        //in the currently bound vao
+      glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
+        (GLvoid*)(0));
+      glEnableVertexAttribArray(1);
+      }
+
+        /*glBindBuffer(GL_ARRAY_BUFFER, spriteVboMap[texPlayer]);
+
+
+        glBufferData(GL_ARRAY_BUFFER, sizeof(spriteCoordinates[texPlayer]), spriteCoordinates[texPlayer], GL_STATIC_DRAW); 
+
+        //tell OpenGL how to interpret the vertex data
+        //in the currently bound vao
+      glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
+        (GLvoid*)(0));
+      glEnableVertexAttribArray(1);
+        */
+      /*glBindBuffer(GL_ARRAY_BUFFER, spritePositionVbo);
+      glBufferData(GL_ARRAY_BUFFER, sizeof(spritePositionArray), spritePositionArray, GL_STATIC_DRAW); 
+      glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
+        (GLvoid*)(0));
+      glEnableVertexAttribArray(1);*/
+      /*glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat),
+        (GLvoid*)(3*sizeof(GLfloat)));*/
+      /*glBufferData(GL_ARRAY_BUFFER, sizeof(spritePositionArray), spritePositionArray, GL_STATIC_DRAW); */
+      //enable vertex attribute (disabled by default)
+      
 
     //unbind vao
     glBindVertexArray(0);
-
-
-    //create shaders and a shader program with them
-    Shader shadertest = Shader(GL_VERTEX_SHADER, "shader/vertex_shader.gl");
-    Shader shadertest2 = Shader(GL_FRAGMENT_SHADER, "shader/fragment_shader.gl");
-    glProgram1 = new ShaderProgram(shadertest, shadertest2);
-    glProgram1->use();
 
 
     projectionMatrix = glm::ortho(0.0f, (float)windowWidth, 
@@ -185,32 +286,46 @@ namespace Renderer{
   void render(){
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //drawRectangle(glm::vec2(150.0f,0.0f), glm::vec2(windowWidth,300.0f),
-        //glm::vec3(143,54,0));
-
     auto worldEntities = World::getEntities();
-    for (int i = 0 ; i < worldEntities.size() ; ++i){
-      drawRectangle(worldEntities[i]->getPosition(), worldEntities[i]->getSize(),
-          worldEntities[i]->getColor());
-    }
     auto players = World::getPlayers();
     for (int i = 0 ; i < players.size() ; ++i){
-      drawRectangle(players[i]->getPosition(), players[i]->getSize(),
-          players[i]->getColor());
+      drawSprite(players[i]->getPosition(), players[i]->getSize(),
+          players[i]->getColor(), players[i]->getSpriteName());
     }
     auto worldWalls = World::getWalls();
     for (int i = 0 ; i < worldWalls.size() ; ++i){
       if(worldWalls[i] != nullptr){
-        drawRectangle(worldWalls[i]->getPosition(), worldWalls[i]->getSize(),
-            worldWalls[i]->getColor());
+        drawSprite(worldWalls[i]->getPosition(), worldWalls[i]->getSize(),
+            worldWalls[i]->getColor(), worldWalls[i]->getSpriteName());
       }
     }
     SDL_GL_SwapWindow(sdlWindow_);
   }
 
-  float zoom = 1.0f;
+  void drawSprite(glm::vec2 position, glm::vec2 size, glm::vec3 color,
+      int spriteName) {
+    /*//top left
+    rectangleVertices[3] = spritePosition[spriteName].x;
+    rectangleVertices[4] = spritePosition[spriteName].y;
+    //top right
+    rectangleVertices[8] = spritePosition[spriteName].x +
+      spriteSize[spriteName].x;
+    rectangleVertices[9] = spritePosition[spriteName].y;
+    //bottom left
+    rectangleVertices[13] = spritePosition[spriteName].x;
+    rectangleVertices[14] = spritePosition[spriteName].y +
+      spriteSize[spriteName].y;
+    //bottom right
+    rectangleVertices[18] = spritePosition[spriteName].x +
+      spriteSize[spriteName].x;
+    rectangleVertices[19] = spritePosition[spriteName].y +
+      spriteSize[spriteName].y;
 
-  void drawRectangle(glm::vec2 position, glm::vec2 size, glm::vec3 color) {
+    glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), rectangleVertices, GL_DYNAMIC_DRAW); 
+
+      */
+   // glBufferData(GL_ARRAY_BUFFER, sizeof(spriteCoordinates[spriteName]),
+    //    spriteCoordinates[spriteName], GL_STATIC_DRAW);
     glm::mat4 model;
     model = glm::translate(model, glm::vec3(position, 0.0f));
     model = glm::scale(model, glm::vec3(size, 1.0f));
@@ -223,6 +338,31 @@ namespace Renderer{
     color /= 255;
     GLuint colorLoc = glGetUniformLocation(glProgram1->getId(), "inColor");
     glUniform3fv(colorLoc, 1, glm::value_ptr(color));
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindVertexArray(rectangleVao);
+    glBindBuffer(GL_ARRAY_BUFFER, spriteVboMap[spriteName]);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
+        (GLvoid*)(0));
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+  }
+
+  void drawRectangle(glm::vec2 position, glm::vec2 size, glm::vec3 color) {
+    rectangleVertices[0] = 1.0f;
+    glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), rectangleVertices, GL_STATIC_DRAW); 
+    glm::mat4 model;
+    model = glm::translate(model, glm::vec3(position, 0.0f));
+    model = glm::scale(model, glm::vec3(size, 1.0f));
+    GLuint transformLoc = glGetUniformLocation(glProgram1->getId(), "model");
+    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+    GLuint projectionLoc = glGetUniformLocation(glProgram1->getId(), "projection");
+    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+
+    color /= 255;
+    GLuint colorLoc = glGetUniformLocation(glProgram1->getId(), "inColor");
+    glUniform3fv(colorLoc, 1, glm::value_ptr(color));
+    glBindTexture(GL_TEXTURE_2D, texture);
     glBindVertexArray(rectangleVao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
