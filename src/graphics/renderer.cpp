@@ -126,6 +126,10 @@ namespace Renderer{
   GLuint rectangleVao;
   ShaderProgram* glProgram1;
   glm::mat4 projectionMatrix;
+  glm::mat4 viewMatrix;
+  glm::vec2 cameraPosition;
+  int cameraPositionX;
+  int cameraPositionY;
   GLuint texture;
   std::vector<std::string> textureNames;
 
@@ -134,6 +138,8 @@ namespace Renderer{
   std::map<std::string, glm::vec2> spriteSize;
 
   void init(){
+    cameraPositionX = 0;
+    cameraPositionY = 0;
 
     windowWidth =  1000;
     windowHeight = 1000;
@@ -181,6 +187,7 @@ namespace Renderer{
         0,
         SOIL_LOAD_RGB);
 
+    //setup of each sprite's position in the spritesheet
     //chaque texture fait 128x128
     float texSize = 128.0f;
     float left = 0.0f;
@@ -188,16 +195,21 @@ namespace Renderer{
     for (int i = 0 ; i < nbTextures ; ++i){
       float right = left + texSize;
       float bottom = top + texSize;
+      //top left
       spriteCoordinates[i][0] = left / width;
-      spriteCoordinates[i][1] = 1.0f - (top / height);
+      spriteCoordinates[i][1] = 1.0f - top / height;
+      //top right
       spriteCoordinates[i][2] = right / width;
-      spriteCoordinates[i][3] = 1.0f - top / height;
-      spriteCoordinates[i][4] = left / width;
+      spriteCoordinates[i][3] = spriteCoordinates[i][1];
+      //bottom left
+      spriteCoordinates[i][4] = spriteCoordinates[i][0];
       spriteCoordinates[i][5] = 1.0f - bottom / height;
-      spriteCoordinates[i][6] = right / width;
-      spriteCoordinates[i][7] = 1.0f - bottom / height;
+      //bottom right
+      spriteCoordinates[i][6] = spriteCoordinates[i][2];
+      spriteCoordinates[i][7] = spriteCoordinates[i][5];
 
       left += 128.0f;
+      //TODO: set left to 0.0f and y to +texSize when change line in spritesheet
     }
 
     glGenTextures(1, &texture);
@@ -219,9 +231,6 @@ namespace Renderer{
     //generate element buffer object
     glGenBuffers(1, &rectangleEbo);
     
-    glGenBuffers(1, &spriteVboMap[texPlayer]);
-    glGenBuffers(1, &spriteVboMap[texWall]);
-
     //bind vao, it will then "link" the ebo, vbo and
     //vertex attrib pointer config to the vao!
     glBindVertexArray(rectangleVao);
@@ -239,40 +248,15 @@ namespace Renderer{
       glEnableVertexAttribArray(0);
 
       
-      //generate all the vbo
+      //generate the vbo for every texture
       for(int name = 0 ; name < nbTextures ; ++name){
-        //bind vbo and put rectangle vertices in it
+        glGenBuffers(1, &spriteVboMap[name]);
         glBindBuffer(GL_ARRAY_BUFFER, spriteVboMap[name]);
         glBufferData(GL_ARRAY_BUFFER, sizeof(spriteCoordinates[name]), spriteCoordinates[name], GL_STATIC_DRAW); 
-
-        //tell OpenGL how to interpret the vertex data
-        //in the currently bound vao
-      glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
-        (GLvoid*)(0));
-      glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
+          (GLvoid*)(0));
+        glEnableVertexAttribArray(1);
       }
-
-        /*glBindBuffer(GL_ARRAY_BUFFER, spriteVboMap[texPlayer]);
-
-
-        glBufferData(GL_ARRAY_BUFFER, sizeof(spriteCoordinates[texPlayer]), spriteCoordinates[texPlayer], GL_STATIC_DRAW); 
-
-        //tell OpenGL how to interpret the vertex data
-        //in the currently bound vao
-      glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
-        (GLvoid*)(0));
-      glEnableVertexAttribArray(1);
-        */
-      /*glBindBuffer(GL_ARRAY_BUFFER, spritePositionVbo);
-      glBufferData(GL_ARRAY_BUFFER, sizeof(spritePositionArray), spritePositionArray, GL_STATIC_DRAW); 
-      glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat),
-        (GLvoid*)(0));
-      glEnableVertexAttribArray(1);*/
-      /*glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat),
-        (GLvoid*)(3*sizeof(GLfloat)));*/
-      /*glBufferData(GL_ARRAY_BUFFER, sizeof(spritePositionArray), spritePositionArray, GL_STATIC_DRAW); */
-      //enable vertex attribute (disabled by default)
-      
 
     //unbind vao
     glBindVertexArray(0);
@@ -280,52 +264,51 @@ namespace Renderer{
 
     projectionMatrix = glm::ortho(0.0f, (float)windowWidth, 
         (float)windowHeight, 0.0f, -1.0f, 1.0f);
+
+    viewMatrix = glm::translate(viewMatrix, 
+        glm::vec3(windowWidth/2, windowHeight/2,
+        0.0f));
   }
 
 
   void render(){
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    auto worldEntities = World::getEntities();
     auto players = World::getPlayers();
+    viewMatrix = glm::mat4();
+    std::cout << cameraPositionX << std::endl;
+    cameraPositionX = players[0]->getPosition().x
+      + players[0]->getSize().x / 2;
+    cameraPositionY = players[0]->getPosition().y 
+      + players[0]->getSize().y / 2;
+    viewMatrix = glm::translate(viewMatrix, 
+        glm::vec3(windowWidth/2 - cameraPositionX,
+        windowHeight/2 - cameraPositionY,
+        0.0f));
     for (int i = 0 ; i < players.size() ; ++i){
       drawSprite(players[i]->getPosition(), players[i]->getSize(),
           players[i]->getColor(), players[i]->getSpriteName());
     }
-    auto worldWalls = World::getWalls();
+    auto worldWalls = World::getWallsVector();
     for (int i = 0 ; i < worldWalls.size() ; ++i){
       if(worldWalls[i] != nullptr){
         drawSprite(worldWalls[i]->getPosition(), worldWalls[i]->getSize(),
             worldWalls[i]->getColor(), worldWalls[i]->getSpriteName());
       }
     }
+    auto backgroundMap = World::getBackground();
+    for (int i = 0 ; i < backgroundMap.size() ; ++i){
+      if(backgroundMap[i] != nullptr){
+        drawSprite(backgroundMap[i]->getPosition(), backgroundMap[i]->getSize(),
+            backgroundMap[i]->getColor(), backgroundMap[i]->getSpriteName());
+      }
+    }
+
     SDL_GL_SwapWindow(sdlWindow_);
   }
 
   void drawSprite(glm::vec2 position, glm::vec2 size, glm::vec3 color,
       int spriteName) {
-    /*//top left
-    rectangleVertices[3] = spritePosition[spriteName].x;
-    rectangleVertices[4] = spritePosition[spriteName].y;
-    //top right
-    rectangleVertices[8] = spritePosition[spriteName].x +
-      spriteSize[spriteName].x;
-    rectangleVertices[9] = spritePosition[spriteName].y;
-    //bottom left
-    rectangleVertices[13] = spritePosition[spriteName].x;
-    rectangleVertices[14] = spritePosition[spriteName].y +
-      spriteSize[spriteName].y;
-    //bottom right
-    rectangleVertices[18] = spritePosition[spriteName].x +
-      spriteSize[spriteName].x;
-    rectangleVertices[19] = spritePosition[spriteName].y +
-      spriteSize[spriteName].y;
-
-    glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), rectangleVertices, GL_DYNAMIC_DRAW); 
-
-      */
-   // glBufferData(GL_ARRAY_BUFFER, sizeof(spriteCoordinates[spriteName]),
-    //    spriteCoordinates[spriteName], GL_STATIC_DRAW);
     glm::mat4 model;
     model = glm::translate(model, glm::vec3(position, 0.0f));
     model = glm::scale(model, glm::vec3(size, 1.0f));
@@ -334,6 +317,10 @@ namespace Renderer{
 
     GLuint projectionLoc = glGetUniformLocation(glProgram1->getId(), "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+
+    viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0.0f, 0.0f));
+    GLuint viewLoc = glGetUniformLocation(glProgram1->getId(), "view");
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(viewMatrix));
 
     color /= 255;
     GLuint colorLoc = glGetUniformLocation(glProgram1->getId(), "inColor");
@@ -381,4 +368,15 @@ namespace Renderer{
   int getWindowHeight(){
     return windowHeight;
   }
+
+  int getCameraY(){
+    return cameraPositionY;
+  }
+
+  int getCameraX(){
+    return cameraPositionX;
+  }
+
+  
 }
+

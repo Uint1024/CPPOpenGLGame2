@@ -1,4 +1,3 @@
-#include <fstream>
 #include <glm.hpp>
 #include <vector>
 #include <iostream>
@@ -6,84 +5,126 @@
 #include "world.h"
 #include "entity.h"
 #include "player.h"
+#include "bullet.h"
+
+#include "utils.h"
 
 namespace World{
-  static std::vector<Entity*> entities;
-  std::vector<Entity*> walls;
+  std::vector<Entity*> backgroundMap;
+  std::vector<Entity*> wallsVector;
+  std::vector<Entity*> bulletsVector;
   std::vector<Player*> players;
   int mapWidth;
   int mapHeight;
   int tileSize;
 
   void init() {
-    tileSize = 16;
+    tileSize = 40;
     mapWidth = 40;
     mapHeight = 40;
-    int xPos= 0;
-    int yPos = 0;
     for(int i = 0 ; i <= mapWidth * mapHeight ; ++i){
-      walls.push_back(nullptr);
+      wallsVector.push_back(nullptr);
+      backgroundMap.push_back(nullptr);
     }
 
-    std::ifstream file("maps/map1.txt");
-    if(file.is_open()){
-      file.seekg(0, std::ios::end);
-      size_t size = file.tellg();
-      std::string mapString(size, ' ');
-      file.seekg(0);
-      file.read(&mapString[0], size);
+    int tilePositionX =  0;
+    int tilePositionY =  0;
+    int pixelPositionX = 0;
+    int pixelPositionY = 0;
+    int vectorPosition = 0; //position of the tile in the map vectors
 
-      for(int istr = 0 ; istr < size ; ++istr){
-        switch(mapString[istr]){
-          case '1':
-            std::cout << xPos << std::endl;
-            walls[yPos * mapWidth + xPos] = new Entity(
-              xPos * tileSize, yPos * tileSize,
-              tileSize, tileSize,
-              100,100,100, texWall);
-            ++xPos;
-            break;
-          case '0':
-            ++xPos;
-            break;
-          case '\n':
-            ++yPos;
-            xPos = 0;
-            break;
-          case '\r':
-            //Windows return carriage, unused
-            //no nothing
-            break;
-          default:
-            std::cout << "World::init(): unknown character" << std::endl;
-            break;
-        }
+    std::string mapString = Utils::readFileToString("maps/map1.foreground");
+    for(int istr = 0 ; istr < mapString.size() ; ++istr){
+      pixelPositionX = tilePositionX * tileSize;
+      pixelPositionY = tilePositionY * tileSize;
+      vectorPosition = tilePositionY * mapWidth + tilePositionX;
+      switch(mapString[istr]){
+        case '1':
+          wallsVector[vectorPosition] = new Entity(
+            pixelPositionX, pixelPositionY,
+            tileSize, tileSize,
+            100,100,100, texWall);
+          break;
+        case '0':
+          //empty tile
+          break;
+        case 'P':
+          players.push_back(new Player(pixelPositionX, pixelPositionY,
+                25,25,255,255,255));
+          break;
+        case '\n':
+          ++tilePositionY;
+          tilePositionX = -1;
+          break;
+        case '\r':
+          //Windows return carriage, unused
+          --tilePositionX;
+          break;
+        default:
+          std::cout << "World::init(), foreground, unknown character" << std::endl;
+          break;
       }
-    } else {
-      std::cout << "Error in World.cpp::init(), can't open map!" << std::endl;
+      ++tilePositionX;
     }
 
-
-    players.push_back(new Player(100,100,25,25,255,255,255));
-
+    tilePositionX = 0;
+    tilePositionY = 0;
+    std::string backgroundMapString = Utils::readFileToString("maps/map1.background");
+    for(int istr = 0 ; istr < backgroundMapString.size() ; ++istr){
+      pixelPositionX = tilePositionX * tileSize;
+      pixelPositionY = tilePositionY * tileSize;
+      vectorPosition = tilePositionY * mapWidth + tilePositionX;
+      switch(backgroundMapString[istr]){
+        case '0':
+          backgroundMap[vectorPosition] = new Entity(
+            pixelPositionX, pixelPositionY,
+            tileSize, tileSize,
+            100,100,100, texGround);
+          break;
+        case '\n':
+          ++tilePositionY;
+          tilePositionX = -1;
+          break;
+        case '\r':
+          //Windows return carriage, unused
+          --tilePositionX;
+          break;
+        default:
+          std::cout << "World::init(), background, unknown character" << std::endl;
+          break;
+      }
+      ++tilePositionX;
+    }
   }
 
   void update() {
-    //update each entity's component
     for(Player* player : players){
       player->update();
     }
-  }
 
-  std::vector<Entity*>& getEntities(){
-    return entities;
+    for(int i = 0 ; i < bulletsVector.size();){
+      bulletsVector[i]->update();
+      if(!bulletsVector[i]->isAlive()){
+        bulletsVector.erase(bulletsVector.begin()+i);
+      }
+      else {
+        ++i;
+      }
+    }
+  }
+  
+  void createBullet(int x, int y, float angle){
+    bulletsVector.push_back(new Bullet(x, y, angle));
   }
 
   std::vector<Player*>& getPlayers(){
     return players;
   }
-  std::vector<Entity*>& getWalls(){
-    return walls;
+  std::vector<Entity*>& getWallsVector(){
+    return wallsVector;
+  }
+  std::vector<Entity*>& getBackground(){
+    return backgroundMap;
   }
   int getTileSize(){
     return tileSize;
@@ -94,4 +135,5 @@ namespace World{
   int getMapHeight(){
     return mapHeight;
   }
+
 }

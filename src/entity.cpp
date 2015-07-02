@@ -9,7 +9,8 @@ mPosition(position),
 mSize(size),
 mColor(color),
 mMovement(glm::vec2(0.0f, 0.0f)),
-mSpriteName(spriteName){
+mSpriteName(spriteName),
+mAlive(true){
   
 }
 
@@ -24,10 +25,11 @@ Entity::~Entity(){
   
 }
 
-void Entity::checkCollisionWithMap(){
+bool Entity::checkCollisionWithMap(){
   int minX, maxX, minY, maxY;
   Entity* pWallFound = nullptr;
-  auto rWalls = World::getWalls();
+  bool collision = false;
+  auto rWalls = World::getWallsVector();
   if(mMovement.x < 0){
     maxX = mPosition.x / World::getTileSize();
     minY = mPosition.y / World::getTileSize();
@@ -45,6 +47,7 @@ void Entity::checkCollisionWithMap(){
       }
     }
     if(pWallFound != nullptr){
+      collision = true;
       int distance = (pWallFound->getPosition().x +
           pWallFound->getSize().x) - mPosition.x;
         std::cout << "Distance = " << distance << ", mMovement.x = " << mMovement.x << std::endl;
@@ -53,6 +56,7 @@ void Entity::checkCollisionWithMap(){
       }
     }
   }
+  
   pWallFound = nullptr;
   if(mMovement.x > 0){
     minX = (mPosition.x + mSize.x) / 
@@ -73,6 +77,7 @@ void Entity::checkCollisionWithMap(){
       }
     }
     if(pWallFound != nullptr){
+      collision = true;
       int distance = pWallFound->getPosition().x -
         (mPosition.x + mSize.x);
       std::cout << "Distance = " << distance << ", mMovement.x = " << mMovement.x << std::endl;
@@ -100,6 +105,7 @@ void Entity::checkCollisionWithMap(){
       }
     }
     if(pWallFound != nullptr){
+      collision = true;
       int distance = (pWallFound->getPosition().y +
           pWallFound->getSize().y) - mPosition.y;
         std::cout << "Distance = " << distance << ", mMovement.x = " << mMovement.x << std::endl;
@@ -111,7 +117,6 @@ void Entity::checkCollisionWithMap(){
 
   pWallFound = nullptr;
   if(mMovement.y > 0){
-    
     minY = (mPosition.y + mSize.y) / 
       World::getTileSize();
     minX = mPosition.x / World::getTileSize();
@@ -129,6 +134,7 @@ void Entity::checkCollisionWithMap(){
       }
     }
     if(pWallFound != nullptr){
+      collision = true;
       int distance = pWallFound->getPosition().y -
         (mPosition.y + mSize.y);
       std::cout << "Distance = " << distance << ", mMovement.y = " << mMovement.x << std::endl;
@@ -137,6 +143,8 @@ void Entity::checkCollisionWithMap(){
       }
     }
   }
+
+  return collision;
 
 }
 
@@ -148,4 +156,13 @@ void Entity::applyMovement(){
 void Entity::setMovement(float x, float y){
   mMovement.x = x;
   mMovement.y = y;
+}
+
+void Entity::update(){
+  std::cout << "This should never be called. Overwrite in children classes."
+    << std::endl;
+}
+
+bool Entity::isAlive(){
+  return mAlive;
 }

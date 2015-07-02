@@ -1,3 +1,5 @@
+#include "entity.h"
+
 #ifndef BULLET_H
 #define BULLET_H
 class Bullet : public Entity
@@ -6,7 +8,9 @@ class Bullet : public Entity
     int mDamage;
     
   public:
-    Bullet(int x, int y);
+    Bullet(int x, int y, float angle);
+    int getDamage();
+    void update();
 
 };
 #endif

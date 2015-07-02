@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+../include/bullet.h
+entity.h
+../include/entity.h
+
 ../include/entity.h
 glm.hpp
 -
@@ -53,6 +57,10 @@ entity.h
 ../include/entity.h
 input.h
 ../include/input.h
+
+../include/utils.h
+string
+-
 
 ../include/world.h
 vector
@@ -632,6 +640,14 @@ C:/SDL2-2.0.3/include/SDL2/close_code.h
 
 C:/SOIL/src/SOIL.h
 
+C:/Users/John/Documents/cpp/projecttestvim/src/bullet.cpp
+cmath
+-
+bullet.h
+C:/Users/John/Documents/cpp/projecttestvim/src/bullet.h
+graphics/renderer.h
+C:/Users/John/Documents/cpp/projecttestvim/src/graphics/renderer.h
+
 C:/Users/John/Documents/cpp/projecttestvim/src/entity.cpp
 iostream
 -
@@ -701,6 +717,8 @@ world.h
 C:/Users/John/Documents/cpp/projecttestvim/src/world.h
 entity.h
 C:/Users/John/Documents/cpp/projecttestvim/src/entity.h
+graphics/renderer.h
+C:/Users/John/Documents/cpp/projecttestvim/src/graphics/renderer.h
 
 C:/Users/John/Documents/cpp/projecttestvim/src/main.cpp
 iostream
@@ -719,10 +737,20 @@ player.h
 C:/Users/John/Documents/cpp/projecttestvim/src/player.h
 graphics/renderer.h
 C:/Users/John/Documents/cpp/projecttestvim/src/graphics/renderer.h
+world.h
+C:/Users/John/Documents/cpp/projecttestvim/src/world.h
+cmath
+-
 
-C:/Users/John/Documents/cpp/projecttestvim/src/world.cpp
+C:/Users/John/Documents/cpp/projecttestvim/src/utils.cpp
+iostream
+-
 fstream
 -
+utils.h
+C:/Users/John/Documents/cpp/projecttestvim/src/utils.h
+
+C:/Users/John/Documents/cpp/projecttestvim/src/world.cpp
 glm.hpp
 -
 vector
@@ -737,6 +765,10 @@ entity.h
 C:/Users/John/Documents/cpp/projecttestvim/src/entity.h
 player.h
 C:/Users/John/Documents/cpp/projecttestvim/src/player.h
+bullet.h
+C:/Users/John/Documents/cpp/projecttestvim/src/bullet.h
+utils.h
+C:/Users/John/Documents/cpp/projecttestvim/src/utils.h
 
 C:/glew-1.12.0/include/GL/glew.h
 stddef.h

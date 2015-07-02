@@ -14,7 +14,7 @@ class Player : public Entity
     
   public:
     Player(int x, int y, int w, int h, int r, int g, int b);
-    update();
+    virtual void update();
 
 };
 

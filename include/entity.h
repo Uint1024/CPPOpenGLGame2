@@ -14,6 +14,8 @@ class Entity
     glm::vec2 mSize;
     glm::vec3 mColor;
     int mSpriteName;
+    float mAngle;
+    bool mAlive;
     //Sprite mSprite;
 
   public:
@@ -60,9 +62,12 @@ class Entity
       return mSpriteName;
     }
 
+    bool isAlive();
+
     //check if there's a collision with walls or other entities
     //and set correct mMovement values
-    void checkCollisionWithMap();
+    bool checkCollisionWithMap();
+    virtual void update();
 
     //TODO add components...
 

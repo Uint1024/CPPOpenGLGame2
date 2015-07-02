@@ -1,6 +1,8 @@
 #include <iostream>
 #include "player.h"
 #include "graphics/renderer.h"
+#include "world.h"
+#include <cmath>
 
 Player::Player(int x, int y, int w, int h, int r, int g, int b) :
 Entity(x,y,w,h,r,g,b,texPlayer){
@@ -8,7 +10,7 @@ Entity(x,y,w,h,r,g,b,texPlayer){
   std::cout << "Creating a player " << mPlayerId << std::endl;
 }
 
-Player::update(){
+void Player::update(){
   mMovement.x = 0;
   mMovement.y = 0;
   if(Input::playerIsKeyDown(mPlayerId, Key::Right)){
@@ -28,6 +30,8 @@ Player::update(){
   applyMovement();
 
   if(Input::playerIsKeyDown(mPlayerId, Key::Shoot)){
+    double angle = std::atan2(Input::getMouseWorldPositionX() - mPosition.x,
+        Input::getMouseWorldPositionY() - mPosition.y);
 
   }
 }

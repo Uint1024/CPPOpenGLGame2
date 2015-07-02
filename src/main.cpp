@@ -9,7 +9,6 @@ int main( int argc, char **argv ) {
   World::init();
 
   bool runGame = true;
-
   while(runGame){
     Input::pollEvents(runGame);
     World::update();

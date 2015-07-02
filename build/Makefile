@@ -123,6 +123,33 @@ openglgame/fast:
 	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/build
 .PHONY : openglgame/fast
 
+src/bullet.obj: src/bullet.cpp.obj
+
+.PHONY : src/bullet.obj
+
+# target to build an object file
+src/bullet.cpp.obj:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/bullet.cpp.obj
+.PHONY : src/bullet.cpp.obj
+
+src/bullet.i: src/bullet.cpp.i
+
+.PHONY : src/bullet.i
+
+# target to preprocess a source file
+src/bullet.cpp.i:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/bullet.cpp.i
+.PHONY : src/bullet.cpp.i
+
+src/bullet.s: src/bullet.cpp.s
+
+.PHONY : src/bullet.s
+
+# target to generate assembly for a file
+src/bullet.cpp.s:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/bullet.cpp.s
+.PHONY : src/bullet.cpp.s
+
 src/entity.obj: src/entity.cpp.obj
 
 .PHONY : src/entity.obj
@@ -312,6 +339,33 @@ src/player.cpp.s:
 	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/player.cpp.s
 .PHONY : src/player.cpp.s
 
+src/utils.obj: src/utils.cpp.obj
+
+.PHONY : src/utils.obj
+
+# target to build an object file
+src/utils.cpp.obj:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/utils.cpp.obj
+.PHONY : src/utils.cpp.obj
+
+src/utils.i: src/utils.cpp.i
+
+.PHONY : src/utils.i
+
+# target to preprocess a source file
+src/utils.cpp.i:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/utils.cpp.i
+.PHONY : src/utils.cpp.i
+
+src/utils.s: src/utils.cpp.s
+
+.PHONY : src/utils.s
+
+# target to generate assembly for a file
+src/utils.cpp.s:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/utils.cpp.s
+.PHONY : src/utils.cpp.s
+
 src/world.obj: src/world.cpp.obj
 
 .PHONY : src/world.obj
@@ -348,6 +402,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... openglgame"
+	@echo "... src/bullet.obj"
+	@echo "... src/bullet.i"
+	@echo "... src/bullet.s"
 	@echo "... src/entity.obj"
 	@echo "... src/entity.i"
 	@echo "... src/entity.s"
@@ -369,6 +426,9 @@ help:
 	@echo "... src/player.obj"
 	@echo "... src/player.i"
 	@echo "... src/player.s"
+	@echo "... src/utils.obj"
+	@echo "... src/utils.i"
+	@echo "... src/utils.s"
 	@echo "... src/world.obj"
 	@echo "... src/world.i"
 	@echo "... src/world.s"

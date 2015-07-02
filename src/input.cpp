@@ -5,6 +5,7 @@
 #include "world.h"
 #include "entity.h"
 
+#include "graphics/renderer.h"
 
 
 namespace Input{
@@ -12,13 +13,16 @@ namespace Input{
   //bool keyDown[300] = {false};
   std::array<bool, 300> keyDown = {false};
   std::array<bool, 15> mouseButtonDown = {false};
+  int mouseX = 0;
+  int mouseY = 0;
+  int mouseWorldPositionX = 0;
+  int mouseWorldPositionY = 0;
 
   //key bindings for 4 players :
   //bind a key to a controller type (keyboard, mouse, gamepad...) 
   std::array<std::array<ControllerType, (int)Key::NumKeys>, 4> keyControllerType;
   //bind one of the controller's key/button to a game key
   std::array<std::array<int, (int)Key::NumKeys>, 4> keyBindings;
-
 
 
   void init() {
@@ -35,7 +39,6 @@ namespace Input{
     keyControllerType[playerId][(int)Key::Up] =     ControllerType::Keyboard;
     keyControllerType[playerId][(int)Key::Shoot] =  ControllerType::Mouse;
 
-
   }
 
   void pollEvents(bool& runGame) {
@@ -45,10 +48,14 @@ namespace Input{
           runGame = false;
           break;
         case SDL_KEYDOWN:
-          keyDown[e.key.keysym.scancode] = true;
+          if( e.key.keysym.scancode == SDL_SCANCODE_L ||
+              e.key.keysym.scancode == SDL_SCANCODE_F6){
+            runGame = false;
+          }
+          keyDown[e.key.keysym.scancode] =   true;
           break;
         case SDL_KEYUP:
-          keyDown[e.key.keysym.scancode] = false;
+          keyDown[e.key.keysym.scancode] =   false;
           break;
         case SDL_MOUSEBUTTONDOWN:
           mouseButtonDown[e.button.button] = true;
@@ -58,6 +65,10 @@ namespace Input{
           break;
       }
     }
+
+    SDL_GetMouseState(&mouseX, &mouseY);
+    mouseWorldPositionX = mouseX + Renderer::getCameraX() - Renderer::getWindowWidth()/2;
+    mouseWorldPositionY = mouseY + Renderer::getCameraY() - Renderer::getWindowHeight()/2;
   }
 
   bool isKeyDown(int scancode){
@@ -75,6 +86,19 @@ namespace Input{
     else {
       std::cout << "Input::playerIsKeyDown(): unknown key!" << std::endl;
     }
+  }
+
+  int getMouseX(){
+    return mouseX;
+  }
+  int getMouseY(){
+    return mouseY;
+  }
+  int getMouseWorldPositionX(){
+    return mouseWorldPositionX;
+  }
+  int getMouseWorldPositionY(){
+    return mouseWorldPositionY;
   }
 }
 

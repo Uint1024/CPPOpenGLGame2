@@ -1,15 +1,19 @@
-
 #include <SDL_opengl.h>
 #include "SDL.h"
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
-
 #include <string>
 
 #ifndef RENDERER_H
 #define RENDERER_H
-enum Texture { texPlayer, texWall, nbTextures };
+
+enum Texture { texPlayer, 
+  texWall, 
+  texGround,
+  texBullet,
+  nbTextures };
+
 namespace OpenGLUtils {
   GLchar* readFileToCString(const char* fileName);
   void checkShaderCompilationStatus(GLuint shaderId);
@@ -26,7 +30,8 @@ namespace Renderer{
       int spriteName);
   int getWindowWidth();
   int getWindowHeight();
-
+  int getCameraX();
+  int getCameraY();
 }
 
 #endif

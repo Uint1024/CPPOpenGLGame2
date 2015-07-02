@@ -6,4 +6,8 @@ namespace Input{
   bool isKeyDown(int scancode);
 
   bool playerIsKeyDown(int playerId, Key keyId);
+  int getMouseY();
+  int getMouseY();
+  int getMouseWorldPositionX();
+  int getMouseWorldPositionY();
 }
