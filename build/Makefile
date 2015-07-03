@@ -366,6 +366,33 @@ src/utils.cpp.s:
 	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/utils.cpp.s
 .PHONY : src/utils.cpp.s
 
+src/weapon.obj: src/weapon.cpp.obj
+
+.PHONY : src/weapon.obj
+
+# target to build an object file
+src/weapon.cpp.obj:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/weapon.cpp.obj
+.PHONY : src/weapon.cpp.obj
+
+src/weapon.i: src/weapon.cpp.i
+
+.PHONY : src/weapon.i
+
+# target to preprocess a source file
+src/weapon.cpp.i:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/weapon.cpp.i
+.PHONY : src/weapon.cpp.i
+
+src/weapon.s: src/weapon.cpp.s
+
+.PHONY : src/weapon.s
+
+# target to generate assembly for a file
+src/weapon.cpp.s:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/weapon.cpp.s
+.PHONY : src/weapon.cpp.s
+
 src/world.obj: src/world.cpp.obj
 
 .PHONY : src/world.obj
@@ -429,6 +456,9 @@ help:
 	@echo "... src/utils.obj"
 	@echo "... src/utils.i"
 	@echo "... src/utils.s"
+	@echo "... src/weapon.obj"
+	@echo "... src/weapon.i"
+	@echo "... src/weapon.s"
 	@echo "... src/world.obj"
 	@echo "... src/world.i"
 	@echo "... src/world.s"

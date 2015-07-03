@@ -115,6 +115,8 @@ namespace World{
   
   void createBullet(int x, int y, float angle){
     bulletsVector.push_back(new Bullet(x, y, angle));
+    std::cout << "World::createBullet : " << bulletsVector.size() << std::endl;
+
   }
 
   std::vector<Player*>& getPlayers(){
@@ -125,6 +127,9 @@ namespace World{
   }
   std::vector<Entity*>& getBackground(){
     return backgroundMap;
+  }
+  std::vector<Entity*>& getBulletsVector(){
+    return bulletsVector;
   }
   int getTileSize(){
     return tileSize;

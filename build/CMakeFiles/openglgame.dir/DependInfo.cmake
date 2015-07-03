@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/John/Documents/cpp/projecttestvim/src/main.cpp" "C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles/openglgame.dir/src/main.cpp.obj"
   "C:/Users/John/Documents/cpp/projecttestvim/src/player.cpp" "C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles/openglgame.dir/src/player.cpp.obj"
   "C:/Users/John/Documents/cpp/projecttestvim/src/utils.cpp" "C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles/openglgame.dir/src/utils.cpp.obj"
+  "C:/Users/John/Documents/cpp/projecttestvim/src/weapon.cpp" "C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles/openglgame.dir/src/weapon.cpp.obj"
   "C:/Users/John/Documents/cpp/projecttestvim/src/world.cpp" "C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles/openglgame.dir/src/world.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

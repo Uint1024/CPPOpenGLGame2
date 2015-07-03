@@ -152,7 +152,7 @@ namespace Renderer{
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-    sdlWindow_ = SDL_CreateWindow("Test", 50,50,windowWidth,windowHeight, 
+    sdlWindow_ = SDL_CreateWindow("Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth,windowHeight, 
         SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(sdlWindow_);
 
@@ -276,7 +276,6 @@ namespace Renderer{
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     auto players = World::getPlayers();
     viewMatrix = glm::mat4();
-    std::cout << cameraPositionX << std::endl;
     cameraPositionX = players[0]->getPosition().x
       + players[0]->getSize().x / 2;
     cameraPositionY = players[0]->getPosition().y 
@@ -285,6 +284,11 @@ namespace Renderer{
         glm::vec3(windowWidth/2 - cameraPositionX,
         windowHeight/2 - cameraPositionY,
         0.0f));
+    auto bullets = World::getBulletsVector();
+    for (int i = 0 ; i < bullets.size() ; ++i){
+      drawSprite(bullets[i]->getPosition(), bullets[i]->getSize(),
+          bullets[i]->getColor(), bullets[i]->getSpriteName());
+    }
     for (int i = 0 ; i < players.size() ; ++i){
       drawSprite(players[i]->getPosition(), players[i]->getSize(),
           players[i]->getColor(), players[i]->getSpriteName());

@@ -15,6 +15,7 @@ class Entity
     glm::vec3 mColor;
     int mSpriteName;
     float mAngle;
+    float mSpeed;
     bool mAlive;
     //Sprite mSprite;
 

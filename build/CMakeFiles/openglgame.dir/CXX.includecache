@@ -53,6 +53,8 @@ graphics/shader.h
 ../include/player.h
 glm.hpp
 -
+array
+-
 entity.h
 ../include/entity.h
 input.h
@@ -60,6 +62,14 @@ input.h
 
 ../include/utils.h
 string
+-
+
+../include/weapon.h
+SDL.h
+-
+iostream
+-
+glm.hpp
 -
 
 ../include/world.h
@@ -641,6 +651,8 @@ C:/SDL2-2.0.3/include/SDL2/close_code.h
 C:/SOIL/src/SOIL.h
 
 C:/Users/John/Documents/cpp/projecttestvim/src/bullet.cpp
+iostream
+-
 cmath
 -
 bullet.h
@@ -733,14 +745,16 @@ C:/Users/John/Documents/cpp/projecttestvim/src/input.h
 C:/Users/John/Documents/cpp/projecttestvim/src/player.cpp
 iostream
 -
+cmath
+-
 player.h
 C:/Users/John/Documents/cpp/projecttestvim/src/player.h
 graphics/renderer.h
 C:/Users/John/Documents/cpp/projecttestvim/src/graphics/renderer.h
 world.h
 C:/Users/John/Documents/cpp/projecttestvim/src/world.h
-cmath
--
+weapon.h
+C:/Users/John/Documents/cpp/projecttestvim/src/weapon.h
 
 C:/Users/John/Documents/cpp/projecttestvim/src/utils.cpp
 iostream
@@ -749,6 +763,14 @@ fstream
 -
 utils.h
 C:/Users/John/Documents/cpp/projecttestvim/src/utils.h
+
+C:/Users/John/Documents/cpp/projecttestvim/src/weapon.cpp
+cmath
+-
+weapon.h
+C:/Users/John/Documents/cpp/projecttestvim/src/weapon.h
+world.h
+C:/Users/John/Documents/cpp/projecttestvim/src/world.h
 
 C:/Users/John/Documents/cpp/projecttestvim/src/world.cpp
 glm.hpp

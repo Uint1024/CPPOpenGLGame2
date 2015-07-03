@@ -42,6 +42,7 @@ add_executable(openglgame src/main.cpp
   src/player.cpp
   src/utils.cpp
   src/bullet.cpp
+  src/weapon.cpp
   )
 
 

@@ -307,6 +307,31 @@ CMakeFiles/openglgame.dir/src/bullet.cpp.obj.provides: CMakeFiles/openglgame.dir
 CMakeFiles/openglgame.dir/src/bullet.cpp.obj.provides.build: CMakeFiles/openglgame.dir/src/bullet.cpp.obj
 
 
+CMakeFiles/openglgame.dir/src/weapon.cpp.obj: CMakeFiles/openglgame.dir/flags.make
+CMakeFiles/openglgame.dir/src/weapon.cpp.obj: CMakeFiles/openglgame.dir/includes_CXX.rsp
+CMakeFiles/openglgame.dir/src/weapon.cpp.obj: ../src/weapon.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/openglgame.dir/src/weapon.cpp.obj"
+	C:/mingw-w64/i686-4.9.2-posix-dwarf-rt_v3-rev1/mingw32/bin/c++.exe   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/openglgame.dir/src/weapon.cpp.obj -c C:/Users/John/Documents/cpp/projecttestvim/src/weapon.cpp
+
+CMakeFiles/openglgame.dir/src/weapon.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/openglgame.dir/src/weapon.cpp.i"
+	C:/mingw-w64/i686-4.9.2-posix-dwarf-rt_v3-rev1/mingw32/bin/c++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -E C:/Users/John/Documents/cpp/projecttestvim/src/weapon.cpp > CMakeFiles/openglgame.dir/src/weapon.cpp.i
+
+CMakeFiles/openglgame.dir/src/weapon.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/openglgame.dir/src/weapon.cpp.s"
+	C:/mingw-w64/i686-4.9.2-posix-dwarf-rt_v3-rev1/mingw32/bin/c++.exe  $(CXX_DEFINES) $(CXX_FLAGS) -S C:/Users/John/Documents/cpp/projecttestvim/src/weapon.cpp -o CMakeFiles/openglgame.dir/src/weapon.cpp.s
+
+CMakeFiles/openglgame.dir/src/weapon.cpp.obj.requires:
+
+.PHONY : CMakeFiles/openglgame.dir/src/weapon.cpp.obj.requires
+
+CMakeFiles/openglgame.dir/src/weapon.cpp.obj.provides: CMakeFiles/openglgame.dir/src/weapon.cpp.obj.requires
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/weapon.cpp.obj.provides.build
+.PHONY : CMakeFiles/openglgame.dir/src/weapon.cpp.obj.provides
+
+CMakeFiles/openglgame.dir/src/weapon.cpp.obj.provides.build: CMakeFiles/openglgame.dir/src/weapon.cpp.obj
+
+
 # Object files for target openglgame
 openglgame_OBJECTS = \
 "CMakeFiles/openglgame.dir/src/main.cpp.obj" \
@@ -318,7 +343,8 @@ openglgame_OBJECTS = \
 "CMakeFiles/openglgame.dir/src/graphics/shaderProgram.cpp.obj" \
 "CMakeFiles/openglgame.dir/src/player.cpp.obj" \
 "CMakeFiles/openglgame.dir/src/utils.cpp.obj" \
-"CMakeFiles/openglgame.dir/src/bullet.cpp.obj"
+"CMakeFiles/openglgame.dir/src/bullet.cpp.obj" \
+"CMakeFiles/openglgame.dir/src/weapon.cpp.obj"
 
 # External object files for target openglgame
 openglgame_EXTERNAL_OBJECTS =
@@ -333,10 +359,11 @@ openglgame.exe: CMakeFiles/openglgame.dir/src/graphics/shaderProgram.cpp.obj
 openglgame.exe: CMakeFiles/openglgame.dir/src/player.cpp.obj
 openglgame.exe: CMakeFiles/openglgame.dir/src/utils.cpp.obj
 openglgame.exe: CMakeFiles/openglgame.dir/src/bullet.cpp.obj
+openglgame.exe: CMakeFiles/openglgame.dir/src/weapon.cpp.obj
 openglgame.exe: CMakeFiles/openglgame.dir/build.make
 openglgame.exe: CMakeFiles/openglgame.dir/linklibs.rsp
 openglgame.exe: CMakeFiles/openglgame.dir/objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable openglgame.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:/Users/John/Documents/cpp/projecttestvim/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable openglgame.exe"
 	"C:/Program Files (x86)/CMake/bin/cmake.exe" -E remove -f CMakeFiles/openglgame.dir/objects.a
 	C:/mingw-w64/i686-4.9.2-posix-dwarf-rt_v3-rev1/mingw32/bin/ar.exe cr CMakeFiles/openglgame.dir/objects.a @CMakeFiles/openglgame.dir/objects1.rsp
 	C:/mingw-w64/i686-4.9.2-posix-dwarf-rt_v3-rev1/mingw32/bin/c++.exe     -Wl,--whole-archive CMakeFiles/openglgame.dir/objects.a -Wl,--no-whole-archive  -o openglgame.exe -Wl,--out-implib,libopenglgame.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/openglgame.dir/linklibs.rsp
@@ -356,6 +383,7 @@ CMakeFiles/openglgame.dir/requires: CMakeFiles/openglgame.dir/src/graphics/shade
 CMakeFiles/openglgame.dir/requires: CMakeFiles/openglgame.dir/src/player.cpp.obj.requires
 CMakeFiles/openglgame.dir/requires: CMakeFiles/openglgame.dir/src/utils.cpp.obj.requires
 CMakeFiles/openglgame.dir/requires: CMakeFiles/openglgame.dir/src/bullet.cpp.obj.requires
+CMakeFiles/openglgame.dir/requires: CMakeFiles/openglgame.dir/src/weapon.cpp.obj.requires
 
 .PHONY : CMakeFiles/openglgame.dir/requires
 

@@ -36,22 +36,21 @@ bool Entity::checkCollisionWithMap(){
     maxY = (mPosition.y + mSize.y - 1) /
       World::getTileSize();
     if(mPosition.x + mMovement.x < 0){
+      collision = true;
       mMovement.x = 0;
     }
     for(int x = maxX ; x >= 0 && !pWallFound ; --x){
       for(int y = minY ; y <= maxY && !pWallFound ; ++y){
         if(rWalls[y * World::getMapWidth() + x] != nullptr){
           pWallFound = rWalls[y * World::getMapWidth() + x];
-          std::cout << "Found wall at" << x << ":" << y << std::endl;
         }
       }
     }
     if(pWallFound != nullptr){
-      collision = true;
       int distance = (pWallFound->getPosition().x +
           pWallFound->getSize().x) - mPosition.x;
-        std::cout << "Distance = " << distance << ", mMovement.x = " << mMovement.x << std::endl;
       if(mMovement.x < distance){
+        collision = true;
         mMovement.x = distance;
       }
     }
@@ -66,22 +65,21 @@ bool Entity::checkCollisionWithMap(){
       World::getTileSize();
     if(mPosition.x + mMovement.x +mSize.x > 
         World::getTileSize() * World::getMapWidth()){
+      collision = true;
       mMovement.x = 0;
     }
     for(int x = minX ; x < World::getMapWidth() && !pWallFound; ++x){
       for(int y = minY ; y <= maxY && !pWallFound ; ++y){
         if(rWalls[y * World::getMapWidth() + x] != nullptr){
           pWallFound = rWalls[y * World::getMapWidth() + x];
-          std::cout << "Found wall at" << x << ":" << y << std::endl;
         }
       }
     }
     if(pWallFound != nullptr){
-      collision = true;
       int distance = pWallFound->getPosition().x -
         (mPosition.x + mSize.x);
-      std::cout << "Distance = " << distance << ", mMovement.x = " << mMovement.x << std::endl;
       if(mMovement.x > distance){
+        collision = true;
         mMovement.x = distance;
       }
     }
@@ -94,22 +92,21 @@ bool Entity::checkCollisionWithMap(){
     maxX = (mPosition.x + mSize.x - 1) /
       World::getTileSize();
     if(mPosition.y + mMovement.y < 0){
+      collision = true;
       mMovement.y = 0;
     }
     for(int y = maxY ; y >= 0 && !pWallFound; --y){
       for(int x = minX ; x <= maxX && !pWallFound ; ++x){
         if(rWalls[y * World::getMapWidth() + x] != nullptr){
           pWallFound = rWalls[y * World::getMapWidth() + x];
-          std::cout << "Found wall at" << x << ":" << y << std::endl;
         }
       }
     }
     if(pWallFound != nullptr){
-      collision = true;
       int distance = (pWallFound->getPosition().y +
           pWallFound->getSize().y) - mPosition.y;
-        std::cout << "Distance = " << distance << ", mMovement.x = " << mMovement.x << std::endl;
       if(mMovement.y < distance){
+      collision = true;
         mMovement.y = distance;
       }
     }
@@ -123,22 +120,21 @@ bool Entity::checkCollisionWithMap(){
     maxX = (mPosition.x + mSize.x - 1) /
       World::getTileSize();
     if(mPosition.y + mMovement.y > World::getTileSize() * World::getMapWidth()){
+      collision = true;
       mMovement.y = 0;
     }
     for(int y = minY ; y < World::getMapHeight() && !pWallFound; ++y){
       for(int x = minX ; x <= maxX  && !pWallFound; ++x){
         if(rWalls[y * World::getMapWidth() + x] != nullptr){
           pWallFound = rWalls[y * World::getMapWidth() + x];
-          std::cout << "Found wall at" << x << ":" << y << std::endl;
         }
       }
     }
     if(pWallFound != nullptr){
-      collision = true;
       int distance = pWallFound->getPosition().y -
         (mPosition.y + mSize.y);
-      std::cout << "Distance = " << distance << ", mMovement.y = " << mMovement.x << std::endl;
       if(mMovement.y > distance){
+      collision = true;
         mMovement.y = distance;
       }
     }
