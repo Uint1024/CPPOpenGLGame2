@@ -27,6 +27,7 @@ class Weapon
     bool mReloading;
     int mBullets;
     int mMaxBullets;
+    glm::vec2 mBulletSize;
     
   public:
     Weapon(eWeapon type);

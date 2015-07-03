@@ -1138,6 +1138,8 @@ CMakeFiles/openglgame.dir/src/weapon.cpp.obj
  C:/glm/glm/fwd.hpp
  C:/glm/glm/geometric.hpp
  C:/glm/glm/glm.hpp
+ C:/glm/glm/gtc/constants.hpp
+ C:/glm/glm/gtc/constants.inl
  C:/glm/glm/integer.hpp
  C:/glm/glm/mat2x2.hpp
  C:/glm/glm/mat2x3.hpp

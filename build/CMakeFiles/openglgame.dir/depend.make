@@ -1137,6 +1137,8 @@ CMakeFiles/openglgame.dir/src/weapon.cpp.obj: C:/glm/glm/exponential.hpp
 CMakeFiles/openglgame.dir/src/weapon.cpp.obj: C:/glm/glm/fwd.hpp
 CMakeFiles/openglgame.dir/src/weapon.cpp.obj: C:/glm/glm/geometric.hpp
 CMakeFiles/openglgame.dir/src/weapon.cpp.obj: C:/glm/glm/glm.hpp
+CMakeFiles/openglgame.dir/src/weapon.cpp.obj: C:/glm/glm/gtc/constants.hpp
+CMakeFiles/openglgame.dir/src/weapon.cpp.obj: C:/glm/glm/gtc/constants.inl
 CMakeFiles/openglgame.dir/src/weapon.cpp.obj: C:/glm/glm/integer.hpp
 CMakeFiles/openglgame.dir/src/weapon.cpp.obj: C:/glm/glm/mat2x2.hpp
 CMakeFiles/openglgame.dir/src/weapon.cpp.obj: C:/glm/glm/mat2x3.hpp

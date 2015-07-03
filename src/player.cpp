@@ -38,10 +38,13 @@ void Player::update(){
 
 
   if(Input::playerIsKeyDown(mPlayerId, Key::Shoot)){
-    double angle = std::atan2(Input::getMouseWorldPositionX() - mPosition.x,
-        Input::getMouseWorldPositionY() - mPosition.y);
-    mCurrentWeapon->tryToShoot(mPosition, angle);
-    std::cout << angle + glm::half_pi<float>() << std::endl;
+    glm::vec2 middle = glm::vec2(mPosition.x + mSize.x/2, 
+        mPosition.y + mSize.y/2);
+
+    double angle = std::atan2(Input::getMouseWorldPositionX() - middle.x,
+        Input::getMouseWorldPositionY() - middle.y);
+    mCurrentWeapon->tryToShoot(middle, angle);
+    std::cout << angle<< std::endl;
 
   }
 }
