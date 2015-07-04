@@ -12,6 +12,9 @@ enum Texture { texPlayer,
   texWall, 
   texGround,
   texBullet,
+  texMutant,
+  texHellGuardian,
+  texHellDog,
   nbTextures };
 
 namespace OpenGLUtils {

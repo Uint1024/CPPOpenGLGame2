@@ -6,14 +6,15 @@
 #include "entity.h"
 #include "player.h"
 #include "bullet.h"
-
 #include "utils.h"
+#include "mutant.h"
 
 namespace World{
   std::vector<Entity*> backgroundMap;
   std::vector<Entity*> wallsVector;
   std::vector<Entity*> bulletsVector;
   std::vector<Player*> players;
+  std::vector<Entity*> npcsVector;
   int mapWidth;
   int mapHeight;
   int tileSize;
@@ -51,6 +52,10 @@ namespace World{
         case 'P':
           players.push_back(new Player(pixelPositionX, pixelPositionY,
                 25,25,255,255,255));
+          break;
+        case 'M':
+          npcsVector.push_back(new Mutant(glm::vec2(pixelPositionX, 
+                  pixelPositionY)));
           break;
         case '\n':
           ++tilePositionY;
@@ -111,12 +116,21 @@ namespace World{
         ++i;
       }
     }
+
+    for(int i = 0 ; i < npcsVector.size();){
+      npcsVector[i]->update();
+      if(!npcsVector[i]->isAlive()){
+        npcsVector.erase(bulletsVector.begin()+i);
+      }
+      else {
+        ++i;
+      }
+    }
   }
   
   void createBullet(int x, int y, float angle){
     bulletsVector.push_back(new Bullet(x, y, angle));
     std::cout << "World::createBullet : " << bulletsVector.size() << std::endl;
-
   }
 
   std::vector<Player*>& getPlayers(){
@@ -130,6 +144,9 @@ namespace World{
   }
   std::vector<Entity*>& getBulletsVector(){
     return bulletsVector;
+  }
+  std::vector<Entity*>& getNpcsVector(){
+    return npcsVector;
   }
   int getTileSize(){
     return tileSize;

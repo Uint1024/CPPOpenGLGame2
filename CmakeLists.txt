@@ -43,6 +43,8 @@ add_executable(openglgame src/main.cpp
   src/utils.cpp
   src/bullet.cpp
   src/weapon.cpp
+  src/monster.cpp
+  src/mutant.cpp
   )
 
 

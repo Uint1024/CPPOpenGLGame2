@@ -25,6 +25,42 @@ Entity::~Entity(){
   
 }
 
+bool Entity::checkCollisionWithNpcs(){
+  int minX, maxX, minY, maxY, maxXFound;
+  Entity* pNpcFound = nullptr;
+  bool collision = false;
+  auto npcsVector = World::getNpcsVector();
+  if(mMovement.x < 0){
+    maxX = mPosition.x;
+    minX = mPosition.x - 30; //replace with movement speed?
+    minY = mPosition.y;
+    maxY = (mPosition.y + mSize.y - 1);
+    maxXFound = 0;
+    
+    for(int i = 0 ; i < npcsVector.size()  ; i++){
+      if(npcsVector[i]->getPosition().y > minY &&
+          npcsVector[i]->getPosition().y < maxY &&
+          npcsVector[i]->getPosition().x > minX &&
+          npcsVector[i]->getPosition().x < maxX &&
+          maxXFound < npcsVector[i]->getPosition().x){
+          maxXFound = npcsVector[i]->getPosition().x;
+          pNpcFound = npcsVector[i];
+       }
+    }
+    if(pNpcFound != nullptr){
+      int distance = (pNpcFound->getPosition().x +
+          pNpcFound->getSize().x) - mPosition.x;
+      if(mMovement.x < distance){
+        collision = true;
+        mMovement.x = distance;
+      }
+    }
+  }
+  
+  return collision;
+
+}
+
 bool Entity::checkCollisionWithMap(){
   int minX, maxX, minY, maxY;
   Entity* pWallFound = nullptr;

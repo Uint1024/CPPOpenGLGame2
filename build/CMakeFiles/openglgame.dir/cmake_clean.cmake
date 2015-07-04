@@ -10,6 +10,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/openglgame.dir/src/utils.cpp.obj"
   "CMakeFiles/openglgame.dir/src/bullet.cpp.obj"
   "CMakeFiles/openglgame.dir/src/weapon.cpp.obj"
+  "CMakeFiles/openglgame.dir/src/monster.cpp.obj"
+  "CMakeFiles/openglgame.dir/src/mutant.cpp.obj"
   "openglgame.pdb"
   "openglgame.exe"
   "openglgame.exe.manifest"

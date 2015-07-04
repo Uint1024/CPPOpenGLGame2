@@ -9,6 +9,8 @@ namespace World{
   std::vector<Entity*>& getWallsVector();
   std::vector<Entity*>& getBackground();
   std::vector<Entity*>& getBulletsVector();
+  std::vector<Entity*>& getNpcsVector();
+
   int getTileSize();
   int getMapWidth();
   int getMapHeight();

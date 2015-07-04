@@ -25,14 +25,14 @@ Weapon::Weapon(eWeapon type){
 void Weapon::tryToShoot(glm::vec2 position, float angle){
   int currentTime = SDL_GetTicks();
   if(currentTime - mLastShot > mShootingDelay){
-
     mLastShot = currentTime; 
 
     if(mType == weaponRevolver){
-      //on doit trouver le centre des balles
+      //center the bullets
       position.x -= mBulletSize.x / 2; 
       position.y -= mBulletSize.y / 2; 
 
+      //the bullets have to be aligned so we correct their position
       int distance = 6;
       float angleCorrection = angle + glm::half_pi<float>();
       glm::vec2 correction;
@@ -41,11 +41,6 @@ void Weapon::tryToShoot(glm::vec2 position, float angle){
       int positionX = position.x + correction.x;
       int positionY = position.y + correction.y;
       World::createBullet(positionX, positionY, angle);
-      std::cout << "Angle = " << angle << ", angle correction = " << 
-        angleCorrection << ", correctionx = " <<
-        correction.x << ", correctiony = " << correction.y << std::endl;
-      std::cout << position.x << std::endl;
-      
 
       distance = 6;
       angleCorrection = angle - glm::half_pi<float>();
@@ -54,12 +49,6 @@ void Weapon::tryToShoot(glm::vec2 position, float angle){
       positionX = position.x + correction.x;
       positionY = position.y + correction.y;
       World::createBullet(positionX, positionY, angle);
-      std::cout << "Angle = " << angle << ", angle correction = " << 
-        angleCorrection << ", correctionx = " <<
-        correction.x << ", correctiony = " << correction.y << std::endl;
-      std::cout << position.x << std::endl;
-      
-      
     }
   }
 }

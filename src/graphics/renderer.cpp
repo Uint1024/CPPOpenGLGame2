@@ -170,7 +170,9 @@ namespace Renderer{
     }
 
     glViewport( 0.0f, 0.0f, windowWidth, windowHeight);
-    glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     //create shaders and a shader program with them
     Shader shadertest = Shader(GL_VERTEX_SHADER, "shader/vertex_shader.gl");
@@ -185,7 +187,7 @@ namespace Renderer{
         &width,
         &height,
         0,
-        SOIL_LOAD_RGB);
+        SOIL_LOAD_RGBA);
 
     //setup of each sprite's position in the spritesheet
     //chaque texture fait 128x128
@@ -214,7 +216,7 @@ namespace Renderer{
 
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA,
         GL_UNSIGNED_BYTE, image);
     glGenerateMipmap(GL_TEXTURE_2D);
     SOIL_free_image_data(image);
@@ -284,14 +286,12 @@ namespace Renderer{
         glm::vec3(windowWidth/2 - cameraPositionX,
         windowHeight/2 - cameraPositionY,
         0.0f));
-    auto bullets = World::getBulletsVector();
-    for (int i = 0 ; i < bullets.size() ; ++i){
-      drawSprite(bullets[i]->getPosition(), bullets[i]->getSize(),
-          bullets[i]->getColor(), bullets[i]->getSpriteName());
-    }
-    for (int i = 0 ; i < players.size() ; ++i){
-      drawSprite(players[i]->getPosition(), players[i]->getSize(),
-          players[i]->getColor(), players[i]->getSpriteName());
+    auto backgroundMap = World::getBackground();
+    for (int i = 0 ; i < backgroundMap.size() ; ++i){
+      if(backgroundMap[i] != nullptr){
+        drawSprite(backgroundMap[i]->getPosition(), backgroundMap[i]->getSize(),
+            backgroundMap[i]->getColor(), backgroundMap[i]->getSpriteName());
+      }
     }
     auto worldWalls = World::getWallsVector();
     for (int i = 0 ; i < worldWalls.size() ; ++i){
@@ -300,12 +300,19 @@ namespace Renderer{
             worldWalls[i]->getColor(), worldWalls[i]->getSpriteName());
       }
     }
-    auto backgroundMap = World::getBackground();
-    for (int i = 0 ; i < backgroundMap.size() ; ++i){
-      if(backgroundMap[i] != nullptr){
-        drawSprite(backgroundMap[i]->getPosition(), backgroundMap[i]->getSize(),
-            backgroundMap[i]->getColor(), backgroundMap[i]->getSpriteName());
-      }
+    auto monsters = World::getNpcsVector();
+    for (int i = 0 ; i < monsters.size() ; ++i){
+      drawSprite(monsters[i]->getPosition(), monsters[i]->getSize(),
+          monsters[i]->getColor(), monsters[i]->getSpriteName());
+    }
+    auto bullets = World::getBulletsVector();
+    for (int i = 0 ; i < bullets.size() ; ++i){
+      drawSprite(bullets[i]->getPosition(), bullets[i]->getSize(),
+          bullets[i]->getColor(), bullets[i]->getSpriteName());
+    }
+    for (int i = 0 ; i < players.size() ; ++i){
+      drawSprite(players[i]->getPosition(), players[i]->getSize(),
+          players[i]->getColor(), players[i]->getSpriteName());
     }
 
     SDL_GL_SwapWindow(sdlWindow_);

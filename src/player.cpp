@@ -29,13 +29,8 @@ void Player::update(){
     mMovement.y = -5;
   }
 
-
-
-  
   checkCollisionWithMap();
   applyMovement();
-
-
 
   if(Input::playerIsKeyDown(mPlayerId, Key::Shoot)){
     glm::vec2 middle = glm::vec2(mPosition.x + mSize.x/2, 
@@ -44,7 +39,5 @@ void Player::update(){
     double angle = std::atan2(Input::getMouseWorldPositionX() - middle.x,
         Input::getMouseWorldPositionY() - middle.y);
     mCurrentWeapon->tryToShoot(middle, angle);
-    std::cout << angle<< std::endl;
-
   }
 }

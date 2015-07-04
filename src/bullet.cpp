@@ -14,6 +14,7 @@ Entity(x, y, 10, 10, 255, 49, 10, texBullet) {
 void Bullet::update(){
   if(mAlive){
     mAlive = !checkCollisionWithMap();
+    mAlive = !checkCollisionWithNpcs();
     applyMovement();
   }
 }

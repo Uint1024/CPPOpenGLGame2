@@ -1,0 +1,15 @@
+Foreground:
+0 = nothing
+1 = wall
+P = player
+M = mutan
+G = hell guardian
+D = hell dog 
+A = alien
+D = damned
+
+
+
+Background:
+0 = basic ground
+G = grass

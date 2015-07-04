@@ -50,6 +50,18 @@ graphics/shader.h
 
 ../include/input.h
 
+../include/monster.h
+glm.hpp
+-
+entity.h
+-
+
+../include/mutant.h
+glm.hpp
+-
+monster.h
+../include/monster.h
+
 ../include/player.h
 glm.hpp
 -
@@ -742,6 +754,24 @@ C:/Users/John/Documents/cpp/projecttestvim/src/graphics/renderer.h
 input.h
 C:/Users/John/Documents/cpp/projecttestvim/src/input.h
 
+C:/Users/John/Documents/cpp/projecttestvim/src/monster.cpp
+monster.h
+C:/Users/John/Documents/cpp/projecttestvim/src/monster.h
+
+C:/Users/John/Documents/cpp/projecttestvim/src/mutant.cpp
+cmath
+-
+iostream
+-
+world.h
+C:/Users/John/Documents/cpp/projecttestvim/src/world.h
+mutant.h
+C:/Users/John/Documents/cpp/projecttestvim/src/mutant.h
+player.h
+C:/Users/John/Documents/cpp/projecttestvim/src/player.h
+graphics/renderer.h
+C:/Users/John/Documents/cpp/projecttestvim/src/graphics/renderer.h
+
 C:/Users/John/Documents/cpp/projecttestvim/src/player.cpp
 iostream
 -
@@ -793,6 +823,8 @@ bullet.h
 C:/Users/John/Documents/cpp/projecttestvim/src/bullet.h
 utils.h
 C:/Users/John/Documents/cpp/projecttestvim/src/utils.h
+mutant.h
+C:/Users/John/Documents/cpp/projecttestvim/src/mutant.h
 
 C:/glew-1.12.0/include/GL/glew.h
 stddef.h

@@ -11,7 +11,8 @@ enum eWeapon {
   weaponTripleBarrelShotgun,
   weaponBow,
   weaponRockLauncher,
-  weaponLaser
+  weaponLaser,
+  nbOfWeaponTypes
 };
 
 class Weapon

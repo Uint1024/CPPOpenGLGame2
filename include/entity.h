@@ -25,6 +25,7 @@ class Entity
     Entity(int x, int y, int w, int h, int r, int g, int b, 
         int spriteName);
     ~Entity();
+    bool checkCollisionWithNpcs();
     glm::vec2 getPosition() {
       return mPosition;
     }

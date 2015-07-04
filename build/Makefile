@@ -312,6 +312,60 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/monster.obj: src/monster.cpp.obj
+
+.PHONY : src/monster.obj
+
+# target to build an object file
+src/monster.cpp.obj:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/monster.cpp.obj
+.PHONY : src/monster.cpp.obj
+
+src/monster.i: src/monster.cpp.i
+
+.PHONY : src/monster.i
+
+# target to preprocess a source file
+src/monster.cpp.i:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/monster.cpp.i
+.PHONY : src/monster.cpp.i
+
+src/monster.s: src/monster.cpp.s
+
+.PHONY : src/monster.s
+
+# target to generate assembly for a file
+src/monster.cpp.s:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/monster.cpp.s
+.PHONY : src/monster.cpp.s
+
+src/mutant.obj: src/mutant.cpp.obj
+
+.PHONY : src/mutant.obj
+
+# target to build an object file
+src/mutant.cpp.obj:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/mutant.cpp.obj
+.PHONY : src/mutant.cpp.obj
+
+src/mutant.i: src/mutant.cpp.i
+
+.PHONY : src/mutant.i
+
+# target to preprocess a source file
+src/mutant.cpp.i:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/mutant.cpp.i
+.PHONY : src/mutant.cpp.i
+
+src/mutant.s: src/mutant.cpp.s
+
+.PHONY : src/mutant.s
+
+# target to generate assembly for a file
+src/mutant.cpp.s:
+	$(MAKE) -f CMakeFiles/openglgame.dir/build.make CMakeFiles/openglgame.dir/src/mutant.cpp.s
+.PHONY : src/mutant.cpp.s
+
 src/player.obj: src/player.cpp.obj
 
 .PHONY : src/player.obj
@@ -450,6 +504,12 @@ help:
 	@echo "... src/main.obj"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/monster.obj"
+	@echo "... src/monster.i"
+	@echo "... src/monster.s"
+	@echo "... src/mutant.obj"
+	@echo "... src/mutant.i"
+	@echo "... src/mutant.s"
 	@echo "... src/player.obj"
 	@echo "... src/player.i"
 	@echo "... src/player.s"
