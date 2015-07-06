@@ -1,1 +1,0 @@
- -LC:/SDL2-2.0.3/lib  -LC:/glew-1.12.0/lib/Release/Win32  -LC:/SOIL/lib  -lmingw32 -lSDL2main -lSDL2 -lglew32s -Wl,-Bstatic -lSOIL -Wl,-Bdynamic -lglu32 -lopengl32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
