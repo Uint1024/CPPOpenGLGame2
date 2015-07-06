@@ -120,7 +120,7 @@ namespace World{
     for(int i = 0 ; i < npcsVector.size();){
       npcsVector[i]->update();
       if(!npcsVector[i]->isAlive()){
-        npcsVector.erase(bulletsVector.begin()+i);
+        npcsVector.erase(npcsVector.begin()+i);
       }
       else {
         ++i;

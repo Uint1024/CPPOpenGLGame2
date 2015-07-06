@@ -5,6 +5,7 @@ CMakeFiles/openglgame.dir/src/bullet.cpp.obj: ../include/bullet.h
 CMakeFiles/openglgame.dir/src/bullet.cpp.obj: ../include/entity.h
 CMakeFiles/openglgame.dir/src/bullet.cpp.obj: ../include/graphics/renderer.h
 CMakeFiles/openglgame.dir/src/bullet.cpp.obj: ../include/icontroller.h
+CMakeFiles/openglgame.dir/src/bullet.cpp.obj: ../include/world.h
 CMakeFiles/openglgame.dir/src/bullet.cpp.obj: C:/SDL2-2.0.3/include/SDL2/SDL.h
 CMakeFiles/openglgame.dir/src/bullet.cpp.obj: C:/SDL2-2.0.3/include/SDL2/SDL_assert.h
 CMakeFiles/openglgame.dir/src/bullet.cpp.obj: C:/SDL2-2.0.3/include/SDL2/SDL_atomic.h

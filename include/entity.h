@@ -17,6 +17,9 @@ class Entity
     float mAngle;
     float mSpeed;
     bool mAlive;
+    int mHp;
+    int mMaxHp;
+    int mDamage;
     //Sprite mSprite;
 
   public:
@@ -63,6 +66,10 @@ class Entity
     int getSpriteName(){
       return mSpriteName;
     }
+
+    void correctMovementZero();
+    bool simpleCollisionCheck(Entity* e);
+    void takeDamage(int damage);
 
     bool isAlive();
 

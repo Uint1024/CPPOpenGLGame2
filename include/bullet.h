@@ -5,8 +5,6 @@
 class Bullet : public Entity
 {
   private:
-    int mDamage;
-    
   public:
     Bullet(int x, int y, float angle);
     int getDamage();

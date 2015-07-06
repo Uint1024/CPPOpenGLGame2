@@ -12,13 +12,9 @@ enum eMonsterType {
 class Monster : public Entity
 {
   private:
-    int mHp;
-    int mMaxHp;
-    int mDamage; //close combat damage, ie touching the mob
-
   public:
     Monster(glm::vec2 position, glm::vec2 size, glm::vec3 color, 
-        int spriteName);
+        int spriteName, int hp, int damage);
     virtual void update() = 0;
 };
 #endif

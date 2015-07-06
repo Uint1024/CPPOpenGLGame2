@@ -6,7 +6,8 @@
 #include "graphics/renderer.h"
 
 Mutant::Mutant(glm::vec2 position):
-Monster(position, glm::vec2(20,20), glm::vec3(50,50,50), texMutant){
+Monster(position, glm::vec2(20,20), glm::vec3(50,50,50), texMutant,
+    100, 10){
   
   
 }
@@ -27,10 +28,10 @@ void Mutant::update(){
   float adjacent =player1->getPosition().y - mPosition.y; 
   float angle = std::atan2(opposite, adjacent);
 
-  std::cout << angle << std::endl;
 
-  mMovement.x = std::sin(angle) * 5;
-  mMovement.y = std::cos(angle) * 5;
+  mMovement.x = std::sin(angle) * 2;
+  mMovement.y = std::cos(angle) * 2;
+  //correctMovementZero();
 
   checkCollisionWithMap();
   checkCollisionWithNpcs();

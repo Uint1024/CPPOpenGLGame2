@@ -6,6 +6,7 @@ CMakeFiles/openglgame.dir/src/bullet.cpp.obj
  ../include/entity.h
  ../include/graphics/renderer.h
  ../include/icontroller.h
+ ../include/world.h
  C:/SDL2-2.0.3/include/SDL2/SDL.h
  C:/SDL2-2.0.3/include/SDL2/SDL_assert.h
  C:/SDL2-2.0.3/include/SDL2/SDL_atomic.h
